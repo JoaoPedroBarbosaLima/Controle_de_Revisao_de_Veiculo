@@ -45,3 +45,21 @@ Relatórios filtrados por:
 Neste trabalho não serão considerados cadastro de novos usuários do sistema, Emissão de relatórios em pdf/Excel. (As restrições estão suscetíveis a mudanças) 
 
 ## 4. Protótipo 
+Serão elaboradas as seguintes páginas
+
+#### Dashboard
+Mostra um resumo geral do sistema. Exibe quantos veículos estão cadastrados, quantas revisões estão pendentes, ultimos serviços realizados e permite acesso rápido as outras páginas.
+
+#### Lista de Veículos
+Oferecer controle completo sobre os veículos já cadastrados.
+
+#### Cadastro de Veículo
+Permitir registrar um novo veículo ou editar os dados existentes.
+
+#### Registrar Revisão
+Registrar cada serviço realizado.
+
+#### Relatórios
+Permite acompanhar os custos com manutenção e analisar o histórico de revisões.
+
+#### Tudo está sucetivél à mudanças durante o desenvolvimento caso acha necessidade.
