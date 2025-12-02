@@ -6,3 +6,35 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model funcionario {
+  cpf      BigInt    @id
+  nome     String    @db.VarChar(50)
+  telefone String?   @db.VarChar(10)
+  revisao  revisao[]
+}
+
+model revisao {
+  id_revisao        Int         @id @default(autoincrement())
+  cpf_funcionario   BigInt
+  placa_veiculo     String      @db.VarChar(7)
+  data_revisao      DateTime    @db.Date
+  data_prox_revisao DateTime    @db.Date
+  funcionario       funcionario @relation(fields: [cpf_funcionario], references: [cpf], onDelete: NoAction, onUpdate: NoAction)
+  veiculo           veiculo     @relation(fields: [placa_veiculo], references: [placa], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model veiculo {
+  placa         String       @id @db.VarChar(7)
+  quilometragem BigInt
+  cor           String       @db.VarChar(10)
+  modelo        String       @db.VarChar(20)
+  marca         String       @db.VarChar(20)
+  tipo          tipo_veiculo
+  revisao       revisao[]
+}
+
+enum tipo_veiculo {
+  CARRO
+  MOTO
+}
