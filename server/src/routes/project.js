@@ -1,10 +1,13 @@
-import { Router } from "express"
-import ProjectController from "../controllers/ProjectController.js"
+import express from "express"
+import ProjectControl from "../controllers/ProjectController.js"
 
-const projectRouter = Router()
-
-const projectController = new ProjectController()
+const projectController = new ProjectControl()
+const projectRouter = express.Router()
 
 projectRouter.get('/api/projects', projectController.getAll)
 
-export {projectRouter}
+projectRouter.post('/api/novofuncionario', (request,response) => {
+    projectController.create(request, response)
+})
+
+export default projectRouter
