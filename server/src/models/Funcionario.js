@@ -2,6 +2,11 @@ import { prisma } from '../database/client.js'
 
 class FuncionarioService {
 
+    static async listarFuncionarios(){
+        const func = await prisma.funcionario.findMany()
+        return func
+    }
+
     
     static async criarFuncionario(dadosFuncionario) {
         try{
@@ -17,11 +22,24 @@ class FuncionarioService {
             return novoFunc;
 
         } catch (erro) {
-            console.error('Erro ao criar funcionario', erro);
+            console.error('Erro ao criar funcionario', erro)
             throw new Error('Falha no serviço para criar funcionario')
         }
     }
-        
+
+    static async deletarFuncionario(cpfFuncionario){
+        try{
+            const deleteFunc = await prisma.funcionario.delete({
+                where: {
+                    cpf: cpfFuncionario.cpf
+                }
+            })
+            return deleteFunc
+        } catch(erro){
+            console.error('Erro ao deletar funcionario', erro)
+            throw new Error('Falha no serviço para deletar funcionario')
+        }
+    }
 
 }
 
