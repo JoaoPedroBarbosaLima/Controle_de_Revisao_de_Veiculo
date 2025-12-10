@@ -1,18 +1,13 @@
-import express, { response } from "express"
+import express from "express"
 import FuncionarioControl from "../controllers/FuncionarioController.js"
-import { request } from "http"
 
 const FuncionarioController = new FuncionarioControl()
 const funcionarioRouter = express.Router()
 
-funcionarioRouter.get('/api/projects', FuncionarioController.getAll)
+funcionarioRouter.get('/api/funcionarios/listarTodos', FuncionarioController.getAll)
 
-funcionarioRouter.post('/api/criarfuncionario', (request,response) => {
-    FuncionarioController.create(request, response)
-})
+funcionarioRouter.post('/api/funcionarios/registrar', FuncionarioController.create)
 
-funcionarioRouter.delete('/api/deletefuncionario', (request,response) => {
-    FuncionarioController.delete(request, response)
-})
+funcionarioRouter.delete('/api/funcionarios/deletar', FuncionarioController.delete)
 
-export default funcionarioRouter
+export {funcionarioRouter}

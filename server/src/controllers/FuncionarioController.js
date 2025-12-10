@@ -1,4 +1,4 @@
-import FuncionarioService from "../models/Funcionario.js"
+import FuncionarioService from "../models/modelFuncionario.js"
 
 class FuncionarioController {
     async getAll(request,response){
@@ -23,10 +23,10 @@ class FuncionarioController {
     
     async create(request,response){
         try{
-            const result = await FuncionarioService.criarFuncionario(request.body)
+            const result = await FuncionarioService.registrarFuncionario(request.body)
 
             response.status(201).json({
-                message: 'Pessoa cadastrada com succeso',
+                message: 'Pessoa registrada com succeso',
                 cpf: parseInt(result.cpf),
                 nome: result.nome,
                 tel: result.telefone

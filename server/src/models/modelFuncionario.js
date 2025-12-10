@@ -8,7 +8,7 @@ class FuncionarioService {
     }
 
     
-    static async criarFuncionario(dadosFuncionario) {
+    static async registrarFuncionario(dadosFuncionario) {
         try{
 
             const novoFunc = await prisma.funcionario.create({                
@@ -19,7 +19,7 @@ class FuncionarioService {
                 },
             });
 
-            return novoFunc;
+            return novoFunc
 
         } catch (erro) {
             console.error('Erro ao criar funcionario', erro)
