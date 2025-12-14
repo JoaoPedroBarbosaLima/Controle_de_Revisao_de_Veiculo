@@ -1,5 +1,4 @@
-import { json } from 'stream/consumers'
-import VeiculoService from '../models/modelVeiculo.js'
+import VeiculoService from '../services/modelVeiculo.js'
 
 class VeiculoController{
     async create(request,response){
@@ -8,6 +7,8 @@ class VeiculoController{
 
             const result = await VeiculoService.registrarVeiculo(request.body)
     
+            console.log(result)
+
             response.status(201).json({
                 message: 'Sucesso ao registrar veiculo',
                 placa: result.placa,
@@ -19,7 +20,7 @@ class VeiculoController{
             })
         } catch(erro){
             response.status(400).json({
-                erro: `${erro}`
+                erro: erro.message
             })
         }
     }

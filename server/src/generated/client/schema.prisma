@@ -11,6 +11,7 @@ model funcionario {
   cpf      BigInt    @id
   nome     String    @db.VarChar(50)
   telefone String?   @db.VarChar(10)
+  endereco String?   @db.VarChar
   revisao  revisao[]
 }
 
@@ -25,13 +26,23 @@ model revisao {
 }
 
 model veiculo {
-  placa         String       @id @db.VarChar(7)
-  quilometragem BigInt
-  cor           String       @db.VarChar(10)
-  modelo        String       @db.VarChar(20)
-  marca         String       @db.VarChar(20)
-  tipo          tipo_veiculo
-  revisao       revisao[]
+  placa           String       @id @db.VarChar(7)
+  quilometragem   BigInt
+  cor             String       @db.VarChar(10)
+  modelo          String       @db.VarChar(20)
+  marca           String       @db.VarChar(20)
+  tipo            tipo_veiculo
+  cpf_responsavel BigInt
+  revisao         revisao[]
+  cliente         cliente      @relation(fields: [cpf_responsavel], references: [cpf], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model cliente {
+  cpf          BigInt    @id
+  nome         String    @db.VarChar(50)
+  telefone     String?   @db.VarChar(10)
+  proprietario Boolean?
+  veiculo      veiculo[]
 }
 
 enum tipo_veiculo {

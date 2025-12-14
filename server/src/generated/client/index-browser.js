@@ -123,7 +123,8 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.FuncionarioScalarFieldEnum = {
   cpf: 'cpf',
   nome: 'nome',
-  telefone: 'telefone'
+  telefone: 'telefone',
+  endereco: 'endereco'
 };
 
 exports.Prisma.RevisaoScalarFieldEnum = {
@@ -140,7 +141,15 @@ exports.Prisma.VeiculoScalarFieldEnum = {
   cor: 'cor',
   modelo: 'modelo',
   marca: 'marca',
-  tipo: 'tipo'
+  tipo: 'tipo',
+  cpf_responsavel: 'cpf_responsavel'
+};
+
+exports.Prisma.ClienteScalarFieldEnum = {
+  cpf: 'cpf',
+  nome: 'nome',
+  telefone: 'telefone',
+  proprietario: 'proprietario'
 };
 
 exports.Prisma.SortOrder = {
@@ -165,7 +174,8 @@ exports.tipo_veiculo = exports.$Enums.tipo_veiculo = {
 exports.Prisma.ModelName = {
   funcionario: 'funcionario',
   revisao: 'revisao',
-  veiculo: 'veiculo'
+  veiculo: 'veiculo',
+  cliente: 'cliente'
 };
 
 /**

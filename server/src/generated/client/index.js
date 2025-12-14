@@ -96,7 +96,8 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.FuncionarioScalarFieldEnum = {
   cpf: 'cpf',
   nome: 'nome',
-  telefone: 'telefone'
+  telefone: 'telefone',
+  endereco: 'endereco'
 };
 
 exports.Prisma.RevisaoScalarFieldEnum = {
@@ -113,7 +114,15 @@ exports.Prisma.VeiculoScalarFieldEnum = {
   cor: 'cor',
   modelo: 'modelo',
   marca: 'marca',
-  tipo: 'tipo'
+  tipo: 'tipo',
+  cpf_responsavel: 'cpf_responsavel'
+};
+
+exports.Prisma.ClienteScalarFieldEnum = {
+  cpf: 'cpf',
+  nome: 'nome',
+  telefone: 'telefone',
+  proprietario: 'proprietario'
 };
 
 exports.Prisma.SortOrder = {
@@ -138,7 +147,8 @@ exports.tipo_veiculo = exports.$Enums.tipo_veiculo = {
 exports.Prisma.ModelName = {
   funcionario: 'funcionario',
   revisao: 'revisao',
-  veiculo: 'veiculo'
+  veiculo: 'veiculo',
+  cliente: 'cliente'
 };
 /**
  * Create the Client
@@ -148,10 +158,10 @@ const config = {
   "clientVersion": "7.1.0",
   "engineVersion": "ab635e6b9d606fa5c8fb8b1a7f909c3c3c1c98ba",
   "activeProvider": "postgresql",
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel funcionario {\n  cpf      BigInt    @id\n  nome     String    @db.VarChar(50)\n  telefone String?   @db.VarChar(10)\n  revisao  revisao[]\n}\n\nmodel revisao {\n  id_revisao        Int         @id @default(autoincrement())\n  cpf_funcionario   BigInt\n  placa_veiculo     String      @db.VarChar(7)\n  data_revisao      DateTime    @db.Date\n  data_prox_revisao DateTime    @db.Date\n  funcionario       funcionario @relation(fields: [cpf_funcionario], references: [cpf], onDelete: NoAction, onUpdate: NoAction)\n  veiculo           veiculo     @relation(fields: [placa_veiculo], references: [placa], onDelete: NoAction, onUpdate: NoAction)\n}\n\nmodel veiculo {\n  placa         String       @id @db.VarChar(7)\n  quilometragem BigInt\n  cor           String       @db.VarChar(10)\n  modelo        String       @db.VarChar(20)\n  marca         String       @db.VarChar(20)\n  tipo          tipo_veiculo\n  revisao       revisao[]\n}\n\nenum tipo_veiculo {\n  CARRO\n  MOTO\n}\n"
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel funcionario {\n  cpf      BigInt    @id\n  nome     String    @db.VarChar(50)\n  telefone String?   @db.VarChar(10)\n  endereco String?   @db.VarChar\n  revisao  revisao[]\n}\n\nmodel revisao {\n  id_revisao        Int         @id @default(autoincrement())\n  cpf_funcionario   BigInt\n  placa_veiculo     String      @db.VarChar(7)\n  data_revisao      DateTime    @db.Date\n  data_prox_revisao DateTime    @db.Date\n  funcionario       funcionario @relation(fields: [cpf_funcionario], references: [cpf], onDelete: NoAction, onUpdate: NoAction)\n  veiculo           veiculo     @relation(fields: [placa_veiculo], references: [placa], onDelete: NoAction, onUpdate: NoAction)\n}\n\nmodel veiculo {\n  placa           String       @id @db.VarChar(7)\n  quilometragem   BigInt\n  cor             String       @db.VarChar(10)\n  modelo          String       @db.VarChar(20)\n  marca           String       @db.VarChar(20)\n  tipo            tipo_veiculo\n  cpf_responsavel BigInt\n  revisao         revisao[]\n  cliente         cliente      @relation(fields: [cpf_responsavel], references: [cpf], onDelete: NoAction, onUpdate: NoAction)\n}\n\nmodel cliente {\n  cpf          BigInt    @id\n  nome         String    @db.VarChar(50)\n  telefone     String?   @db.VarChar(10)\n  proprietario Boolean?\n  veiculo      veiculo[]\n}\n\nenum tipo_veiculo {\n  CARRO\n  MOTO\n}\n"
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"funcionario\":{\"fields\":[{\"name\":\"cpf\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"nome\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"telefone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"revisao\",\"kind\":\"object\",\"type\":\"revisao\",\"relationName\":\"funcionarioTorevisao\"}],\"dbName\":null},\"revisao\":{\"fields\":[{\"name\":\"id_revisao\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"cpf_funcionario\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"placa_veiculo\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"data_revisao\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"data_prox_revisao\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"funcionario\",\"kind\":\"object\",\"type\":\"funcionario\",\"relationName\":\"funcionarioTorevisao\"},{\"name\":\"veiculo\",\"kind\":\"object\",\"type\":\"veiculo\",\"relationName\":\"revisaoToveiculo\"}],\"dbName\":null},\"veiculo\":{\"fields\":[{\"name\":\"placa\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"quilometragem\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"cor\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"modelo\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"marca\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tipo\",\"kind\":\"enum\",\"type\":\"tipo_veiculo\"},{\"name\":\"revisao\",\"kind\":\"object\",\"type\":\"revisao\",\"relationName\":\"revisaoToveiculo\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"funcionario\":{\"fields\":[{\"name\":\"cpf\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"nome\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"telefone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"endereco\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"revisao\",\"kind\":\"object\",\"type\":\"revisao\",\"relationName\":\"funcionarioTorevisao\"}],\"dbName\":null},\"revisao\":{\"fields\":[{\"name\":\"id_revisao\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"cpf_funcionario\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"placa_veiculo\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"data_revisao\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"data_prox_revisao\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"funcionario\",\"kind\":\"object\",\"type\":\"funcionario\",\"relationName\":\"funcionarioTorevisao\"},{\"name\":\"veiculo\",\"kind\":\"object\",\"type\":\"veiculo\",\"relationName\":\"revisaoToveiculo\"}],\"dbName\":null},\"veiculo\":{\"fields\":[{\"name\":\"placa\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"quilometragem\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"cor\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"modelo\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"marca\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tipo\",\"kind\":\"enum\",\"type\":\"tipo_veiculo\"},{\"name\":\"cpf_responsavel\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"revisao\",\"kind\":\"object\",\"type\":\"revisao\",\"relationName\":\"revisaoToveiculo\"},{\"name\":\"cliente\",\"kind\":\"object\",\"type\":\"cliente\",\"relationName\":\"clienteToveiculo\"}],\"dbName\":null},\"cliente\":{\"fields\":[{\"name\":\"cpf\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"nome\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"telefone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"proprietario\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"veiculo\",\"kind\":\"object\",\"type\":\"veiculo\",\"relationName\":\"clienteToveiculo\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.compilerWasm = {
       getRuntime: async () => require('./query_compiler_bg.js'),
