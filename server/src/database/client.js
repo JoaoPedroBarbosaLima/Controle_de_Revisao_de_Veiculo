@@ -14,7 +14,7 @@ const adapter = new PrismaPg({
   database: process.env.DATABASE
 });
 
-const prisma = new PrismaClient({adapter})
+const Prisma = new PrismaClient({adapter})
 
-export {prisma}
+export { Prisma }
 

@@ -1,4 +1,4 @@
-import { prisma } from '../database/client.js'
+import { Prisma } from '../database/client.js'
 
 class AppError extends Error {
     constructor(message, code = null) {
@@ -10,14 +10,13 @@ class AppError extends Error {
 class VeiculoService { 
 
     static async registrarVeiculo(dadosVeiculo){
-        
 
         let tipos = [ 'MOTO', 'CARRO']
         if(!(tipos.includes((dadosVeiculo.tipo).toUpperCase()))){
                 throw new Error(`Tipo: ${(dadosVeiculo.tipo).toUpperCase()} não existe`)
         }
         
-        const cliente = await prisma.cliente.findUnique({
+        const cliente = await Prisma.cliente.findUnique({
             where: {
                 cpf: dadosVeiculo.cpf_responsavel
             }
@@ -28,7 +27,7 @@ class VeiculoService {
         }
 
         try{
-            const novocarro = await prisma.veiculo.create({
+            const novocarro = await Prisma.veiculo.create({
                 data: {
                     placa: dadosVeiculo.placa,
                     quilometragem: dadosVeiculo.quilometragem,
@@ -59,6 +58,15 @@ class VeiculoService {
 
         }
     }
+
+    static async listarveiculos(){
+        try{
+            return await Prisma.veiculo.findMany()
+        } catch(erro){
+            throw new Error(erro)
+        }
+    }
+
 }
 
 export default VeiculoService

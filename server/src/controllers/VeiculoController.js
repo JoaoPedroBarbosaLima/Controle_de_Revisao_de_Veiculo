@@ -1,13 +1,10 @@
-import VeiculoService from '../services/modelVeiculo.js'
+import VeiculoService from '../services/VeiculoService.js'
 
 class VeiculoController{
+
     async create(request,response){
         try{
-
-
             const result = await VeiculoService.registrarVeiculo(request.body)
-    
-            console.log(result)
 
             response.status(201).json({
                 message: 'Sucesso ao registrar veiculo',
@@ -16,6 +13,7 @@ class VeiculoController{
                 cor: result.cor,
                 modelo: result.modelo,
                 marca: result.marca,
+                cpf_responsavel: parseInt(result.cpf_responsavel),
                 tipo: result.tipo
             })
         } catch(erro){
@@ -31,6 +29,29 @@ class VeiculoController{
         } catch(erro){
             response.status(400).json({
                 erro: `Erro ao deletar veiculo `
+            })
+        }
+    }
+
+    async listall(request,response){
+        try{
+            const rslt = await VeiculoService.listarveiculos()
+
+            const veiculos = rslt.map(v => ({
+                placa: v.placa,
+                quilometragem: parseInt(v.quilometragem),
+                cor: v.cor,
+                modelo: v.modelo,
+                marca: v.marca,
+                cpf_responsavel: parseInt(v.cpf_responsavel),
+                tipo: v.tipo
+            }))
+
+            response.status(200).json(veiculos)
+
+        } catch(erro){
+            response.status(400).json({
+                Erro:`Erro ao listar veiculos`
             })
         }
     }

@@ -1,4 +1,4 @@
-import FuncionarioService from "../services/modelFuncionario.js"
+import FuncionarioService from "../services/FuncionarioService.js"
 
 class FuncionarioController {
     async getAll(request,response){
@@ -15,7 +15,9 @@ class FuncionarioController {
             response.status(200).json(obj)
 
         } catch(erro){
-            response.status(400).json({erro:'Erro ao Listar'})
+            response.status(400).json({
+                Erro:`Erro ao listar funcionarios`
+            })
         }
 
     }

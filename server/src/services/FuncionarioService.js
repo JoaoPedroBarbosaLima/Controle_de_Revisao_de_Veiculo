@@ -1,17 +1,16 @@
-import { prisma } from '../database/client.js'
+import { Prisma } from '../database/client.js'
 
 class FuncionarioService {
 
     static async listarFuncionarios(){
-        const func = await prisma.funcionario.findMany()
-        return func
+        return await Prisma.funcionario.findMany()
     }
 
     
     static async registrarFuncionario(dadosFuncionario) {
         try{
 
-            const novoFunc = await prisma.funcionario.create({                
+            const novoFunc = await Prisma.funcionario.create({                
                 data: {
                     cpf: dadosFuncionario.cpf,
                     nome: dadosFuncionario.nome,
@@ -29,7 +28,7 @@ class FuncionarioService {
 
     static async deletarFuncionario(cpfFuncionario){
         try{
-            const deleteFunc = await prisma.funcionario.delete({
+            const deleteFunc = await Prisma.funcionario.delete({
                 where: {
                     cpf: cpfFuncionario.cpf
                 }
