@@ -1,9 +1,13 @@
-import express, { Router } from "express"
+import express from "express"
 import ClienteControl from "../controllers/ClienteController.js"
 
 const ClienteController = new ClienteControl()
 const clienteRouter = express.Router()
 
-clienteRouter.get('/api/clientes/listarTodos', ClienteController.listall)
+clienteRouter.get('/api/cliente', ClienteController.getAll)
+
+clienteRouter.post('/api/cliente', ClienteController.create)
+
+clienteRouter.delete('/api/cliente', ClienteController.delete)
 
 export { clienteRouter }

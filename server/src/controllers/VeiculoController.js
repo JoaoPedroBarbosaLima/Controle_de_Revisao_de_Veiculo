@@ -26,14 +26,20 @@ class VeiculoController{
     async delete(request,response){
         try{
 
+            const rslt = await VeiculoService.deletarveiculo(request.body)
+            response.status(200).json({
+                message: 'Veiculo deletado com sucesso',
+                placa: rslt.placa
+            })
+
         } catch(erro){
             response.status(400).json({
-                erro: `Erro ao deletar veiculo `
+                erro: `Erro ao deletar veiculo`
             })
         }
     }
 
-    async listall(request,response){
+    async listartodos(request,response){
         try{
             const rslt = await VeiculoService.listarveiculos()
 

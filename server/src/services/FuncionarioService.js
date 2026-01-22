@@ -9,7 +9,6 @@ class FuncionarioService {
     
     static async registrarFuncionario(dadosFuncionario) {
         try{
-
             const novoFunc = await Prisma.funcionario.create({                
                 data: {
                     cpf: dadosFuncionario.cpf,
@@ -21,19 +20,22 @@ class FuncionarioService {
             return novoFunc
 
         } catch (erro) {
-            console.error('Erro ao criar funcionario', erro)
+            if(erro.code  == 'P2002'){
+                 throw new Error(`Funcionario de cpf '${dadosFuncionario.cpf}' já criado.`)
+            }
             throw new Error('Falha no serviço para criar funcionario')
         }
     }
 
     static async deletarFuncionario(cpfFuncionario){
         try{
-            const deleteFunc = await Prisma.funcionario.delete({
+            
+            return await Prisma.funcionario.delete({
                 where: {
                     cpf: cpfFuncionario.cpf
                 }
             })
-            return deleteFunc
+
         } catch(erro){
             console.error('Erro ao deletar funcionario', erro)
             throw new Error('Falha no serviço para deletar funcionario')

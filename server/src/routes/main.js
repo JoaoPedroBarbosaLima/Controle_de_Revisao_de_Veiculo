@@ -1,4 +1,5 @@
 import express from "express"
+import { Query } from "pg"
 const mainRouter = express.Router()
 
 mainRouter.get('/', (request,response)=>{
@@ -6,13 +7,14 @@ mainRouter.get('/', (request,response)=>{
 })
 
 mainRouter.get('/status', (request,response) => {
+    const {nome, idade} = request.query
     response.json({
         code:100,
-        message: "Project Control API Server is running."
+        message: `Project Control ${nome} API Server is running. ${idade}`
     })
 })
 
-mainRouter.get('/admin', (request, response) => {
+mainRouter.get('/admin', (request,response) => {
     response.status(401).send("<h1>Unauthorized</h1>")
 })
 

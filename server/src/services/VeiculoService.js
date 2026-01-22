@@ -47,7 +47,7 @@ class VeiculoService {
                 throw new Error(erro)
             }
             if (erro.code == 'P2002'){
-                throw new Error(`Veículo de placa: ${dadosVeiculo.placa} já registrado`)
+                throw new Error(`Veículo de placa '${dadosVeiculo.placa}' já registrado`)
             } 
 
             if (erro.cause.code == '23514') {
@@ -64,6 +64,20 @@ class VeiculoService {
             return await Prisma.veiculo.findMany()
         } catch(erro){
             throw new Error(erro)
+        }
+    }
+
+    static async deletarveiculo(dadosVeiculo){
+        try{
+            
+            return await Prisma.veiculo.delete({
+                where: {
+                    placa:  dadosVeiculo.placa
+                }
+            })
+
+        }catch(erro){
+            throw new Error('Falha no serviço para deletar veiculo')
         }
     }
 

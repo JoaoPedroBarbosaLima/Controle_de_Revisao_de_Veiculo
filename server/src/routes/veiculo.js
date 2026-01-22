@@ -6,8 +6,8 @@ const VeiculoController = new VeiculoControl()
 const veiculoRouter = express.Router()
 
 
-veiculoRouter.post('/api/veiculo/registrar', VeiculoController.create)
-veiculoRouter.post('/api/veiculo/deletar', VeiculoController.delete)
-veiculoRouter.get('/api/veiculo/listar', VeiculoController.listall)
+veiculoRouter.post('/api/veiculo', VeiculoController.create)
+veiculoRouter.delete('/api/veiculo', VeiculoController.delete)
+veiculoRouter.get('/api/veiculo', VeiculoController.listartodos)
 
 export { veiculoRouter }
