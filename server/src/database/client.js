@@ -1,10 +1,6 @@
 import { PrismaPg } from "@prisma/adapter-pg";
 import{PrismaClient} from '../generated/client/index.js'
 import "dotenv/config";
-import { stringify } from "querystring";
-
-console.log("Conteudo: " + process.env.DATABASE+ " Tipo:" + typeof(process.env.DATABASE))
-
 
 const adapter = new PrismaPg({
   host: process.env.HOST,

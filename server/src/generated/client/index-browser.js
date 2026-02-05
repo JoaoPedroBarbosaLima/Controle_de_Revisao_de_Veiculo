@@ -122,6 +122,7 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.FuncionarioScalarFieldEnum = {
   cpf: 'cpf',
+  id_usuario: 'id_usuario',
   nome: 'nome',
   telefone: 'telefone'
 };
@@ -145,14 +146,16 @@ exports.Prisma.VeiculoScalarFieldEnum = {
 
 exports.Prisma.ClienteScalarFieldEnum = {
   cpf: 'cpf',
+  id_usuario: 'id_usuario',
   nome: 'nome',
   telefone: 'telefone'
 };
 
 exports.Prisma.UsuarioScalarFieldEnum = {
   id_usuario: 'id_usuario',
+  nome: 'nome',
   email: 'email',
-  senha: 'senha',
+  password_hash: 'password_hash',
   tipo: 'tipo',
   ativo: 'ativo'
 };

@@ -9,17 +9,27 @@ class ClienteService {
         }
     }
 
-    static async registrarCliente(dadosCliente){
+    static async registrarCliente(tx,dadosCliente){
 
-        const novoCliente = await Prisma.cliente.create({
-            data: {
-                cpf: dadosCliente.cpf,
-                nome: dadosCliente.nome,
-                telefone: dadosCliente.telefone
+        try{
+
+            const novocliente = await tx.cliente.create({
+                data: {
+                    id_usuario: dadosCliente.id_usuario,
+                    cpf: dadosCliente.cpf,
+                    nome: dadosCliente.nome,
+                    telefone: dadosCliente.telefone
+                }
+            })
+
+            return novocliente
+
+        } catch(erro){
+            if(erro.code  == 'P2002'){
+                throw new Error(`Cliente de cpf '${dadosCliente.cpf}' já criado.`)
             }
-        })
-
-        return novoCliente
+            throw new Error(erro)
+        }
 
     }
     
@@ -33,7 +43,6 @@ class ClienteService {
             })
 
         }catch(erro){
-            console.error('Erro ao deletar funcionario', erro)
             throw new Error('Falha no serviço para deletar funcionario')
         }
     }

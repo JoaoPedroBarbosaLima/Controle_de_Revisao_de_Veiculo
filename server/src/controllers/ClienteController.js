@@ -48,7 +48,6 @@ class ClienteController {
             })
 
         }catch(erro){
-            console.log(erro)
             response.status(400).json({erro:'Erro ao deletar'})
         }
     }

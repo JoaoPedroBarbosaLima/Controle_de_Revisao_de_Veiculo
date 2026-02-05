@@ -8,10 +8,12 @@ datasource db {
 }
 
 model funcionario {
-  cpf      BigInt    @id
-  nome     String    @db.VarChar(50)
-  telefone String?   @db.VarChar(10)
-  revisao  revisao[]
+  cpf        BigInt    @id
+  id_usuario Int       @default(autoincrement())
+  nome       String    @db.VarChar(50)
+  telefone   String?   @db.VarChar(11)
+  usuario    usuario   @relation(fields: [id_usuario], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction)
+  revisao    revisao[]
 }
 
 model revisao {
@@ -35,17 +37,22 @@ model veiculo {
 }
 
 model cliente {
-  cpf      BigInt  @id
-  nome     String  @db.VarChar(50)
-  telefone String? @db.VarChar(10)
+  cpf        BigInt  @id
+  id_usuario Int     @unique @default(autoincrement())
+  nome       String  @db.VarChar(50)
+  telefone   String? @db.VarChar(11)
+  usuario    usuario @relation(fields: [id_usuario], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model usuario {
-  id_usuario Int          @id @default(autoincrement())
-  email      String       @unique @db.VarChar(150)
-  senha      String       @unique @db.VarChar(255)
-  tipo       tipo_usuario
-  ativo      Boolean
+  id_usuario    Int           @id @default(autoincrement())
+  nome          String        @db.VarChar(50)
+  email         String        @unique @db.VarChar(150)
+  password_hash String        @db.VarChar(255)
+  tipo          tipo_usuario  @default(CLIENTE)
+  ativo         Boolean
+  cliente       cliente?
+  funcionario   funcionario[]
 }
 
 enum tipo_veiculo {

@@ -1314,6 +1314,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type UsuarioCountOutputType
+   */
+
+  export type UsuarioCountOutputType = {
+    funcionario: number
+  }
+
+  export type UsuarioCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    funcionario?: boolean | UsuarioCountOutputTypeCountFuncionarioArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * UsuarioCountOutputType without action
+   */
+  export type UsuarioCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UsuarioCountOutputType
+     */
+    select?: UsuarioCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UsuarioCountOutputType without action
+   */
+  export type UsuarioCountOutputTypeCountFuncionarioArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: funcionarioWhereInput
+  }
+
+
+  /**
    * Models
    */
 
@@ -1331,26 +1362,31 @@ export namespace Prisma {
 
   export type FuncionarioAvgAggregateOutputType = {
     cpf: number | null
+    id_usuario: number | null
   }
 
   export type FuncionarioSumAggregateOutputType = {
     cpf: bigint | null
+    id_usuario: number | null
   }
 
   export type FuncionarioMinAggregateOutputType = {
     cpf: bigint | null
+    id_usuario: number | null
     nome: string | null
     telefone: string | null
   }
 
   export type FuncionarioMaxAggregateOutputType = {
     cpf: bigint | null
+    id_usuario: number | null
     nome: string | null
     telefone: string | null
   }
 
   export type FuncionarioCountAggregateOutputType = {
     cpf: number
+    id_usuario: number
     nome: number
     telefone: number
     _all: number
@@ -1359,26 +1395,31 @@ export namespace Prisma {
 
   export type FuncionarioAvgAggregateInputType = {
     cpf?: true
+    id_usuario?: true
   }
 
   export type FuncionarioSumAggregateInputType = {
     cpf?: true
+    id_usuario?: true
   }
 
   export type FuncionarioMinAggregateInputType = {
     cpf?: true
+    id_usuario?: true
     nome?: true
     telefone?: true
   }
 
   export type FuncionarioMaxAggregateInputType = {
     cpf?: true
+    id_usuario?: true
     nome?: true
     telefone?: true
   }
 
   export type FuncionarioCountAggregateInputType = {
     cpf?: true
+    id_usuario?: true
     nome?: true
     telefone?: true
     _all?: true
@@ -1472,6 +1513,7 @@ export namespace Prisma {
 
   export type FuncionarioGroupByOutputType = {
     cpf: bigint
+    id_usuario: number
     nome: string
     telefone: string | null
     _count: FuncionarioCountAggregateOutputType | null
@@ -1497,45 +1539,59 @@ export namespace Prisma {
 
   export type funcionarioSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     cpf?: boolean
+    id_usuario?: boolean
     nome?: boolean
     telefone?: boolean
+    usuario?: boolean | usuarioDefaultArgs<ExtArgs>
     revisao?: boolean | funcionario$revisaoArgs<ExtArgs>
     _count?: boolean | FuncionarioCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["funcionario"]>
 
   export type funcionarioSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     cpf?: boolean
+    id_usuario?: boolean
     nome?: boolean
     telefone?: boolean
+    usuario?: boolean | usuarioDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["funcionario"]>
 
   export type funcionarioSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     cpf?: boolean
+    id_usuario?: boolean
     nome?: boolean
     telefone?: boolean
+    usuario?: boolean | usuarioDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["funcionario"]>
 
   export type funcionarioSelectScalar = {
     cpf?: boolean
+    id_usuario?: boolean
     nome?: boolean
     telefone?: boolean
   }
 
-  export type funcionarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"cpf" | "nome" | "telefone", ExtArgs["result"]["funcionario"]>
+  export type funcionarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"cpf" | "id_usuario" | "nome" | "telefone", ExtArgs["result"]["funcionario"]>
   export type funcionarioInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usuario?: boolean | usuarioDefaultArgs<ExtArgs>
     revisao?: boolean | funcionario$revisaoArgs<ExtArgs>
     _count?: boolean | FuncionarioCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type funcionarioIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type funcionarioIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type funcionarioIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usuario?: boolean | usuarioDefaultArgs<ExtArgs>
+  }
+  export type funcionarioIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usuario?: boolean | usuarioDefaultArgs<ExtArgs>
+  }
 
   export type $funcionarioPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "funcionario"
     objects: {
+      usuario: Prisma.$usuarioPayload<ExtArgs>
       revisao: Prisma.$revisaoPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       cpf: bigint
+      id_usuario: number
       nome: string
       telefone: string | null
     }, ExtArgs["result"]["funcionario"]>
@@ -1932,6 +1988,7 @@ export namespace Prisma {
    */
   export interface Prisma__funcionarioClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    usuario<T extends usuarioDefaultArgs<ExtArgs> = {}>(args?: Subset<T, usuarioDefaultArgs<ExtArgs>>): Prisma__usuarioClient<$Result.GetResult<Prisma.$usuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     revisao<T extends funcionario$revisaoArgs<ExtArgs> = {}>(args?: Subset<T, funcionario$revisaoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$revisaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1963,6 +2020,7 @@ export namespace Prisma {
    */
   interface funcionarioFieldRefs {
     readonly cpf: FieldRef<"funcionario", 'BigInt'>
+    readonly id_usuario: FieldRef<"funcionario", 'Int'>
     readonly nome: FieldRef<"funcionario", 'String'>
     readonly telefone: FieldRef<"funcionario", 'String'>
   }
@@ -2214,6 +2272,10 @@ export namespace Prisma {
      */
     data: funcionarioCreateManyInput | funcionarioCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: funcionarioIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -2284,6 +2346,10 @@ export namespace Prisma {
      * Limit how many funcionarios to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: funcionarioIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -4630,26 +4696,31 @@ export namespace Prisma {
 
   export type ClienteAvgAggregateOutputType = {
     cpf: number | null
+    id_usuario: number | null
   }
 
   export type ClienteSumAggregateOutputType = {
     cpf: bigint | null
+    id_usuario: number | null
   }
 
   export type ClienteMinAggregateOutputType = {
     cpf: bigint | null
+    id_usuario: number | null
     nome: string | null
     telefone: string | null
   }
 
   export type ClienteMaxAggregateOutputType = {
     cpf: bigint | null
+    id_usuario: number | null
     nome: string | null
     telefone: string | null
   }
 
   export type ClienteCountAggregateOutputType = {
     cpf: number
+    id_usuario: number
     nome: number
     telefone: number
     _all: number
@@ -4658,26 +4729,31 @@ export namespace Prisma {
 
   export type ClienteAvgAggregateInputType = {
     cpf?: true
+    id_usuario?: true
   }
 
   export type ClienteSumAggregateInputType = {
     cpf?: true
+    id_usuario?: true
   }
 
   export type ClienteMinAggregateInputType = {
     cpf?: true
+    id_usuario?: true
     nome?: true
     telefone?: true
   }
 
   export type ClienteMaxAggregateInputType = {
     cpf?: true
+    id_usuario?: true
     nome?: true
     telefone?: true
   }
 
   export type ClienteCountAggregateInputType = {
     cpf?: true
+    id_usuario?: true
     nome?: true
     telefone?: true
     _all?: true
@@ -4771,6 +4847,7 @@ export namespace Prisma {
 
   export type ClienteGroupByOutputType = {
     cpf: bigint
+    id_usuario: number
     nome: string
     telefone: string | null
     _count: ClienteCountAggregateOutputType | null
@@ -4796,35 +4873,54 @@ export namespace Prisma {
 
   export type clienteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     cpf?: boolean
+    id_usuario?: boolean
     nome?: boolean
     telefone?: boolean
+    usuario?: boolean | usuarioDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["cliente"]>
 
   export type clienteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     cpf?: boolean
+    id_usuario?: boolean
     nome?: boolean
     telefone?: boolean
+    usuario?: boolean | usuarioDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["cliente"]>
 
   export type clienteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     cpf?: boolean
+    id_usuario?: boolean
     nome?: boolean
     telefone?: boolean
+    usuario?: boolean | usuarioDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["cliente"]>
 
   export type clienteSelectScalar = {
     cpf?: boolean
+    id_usuario?: boolean
     nome?: boolean
     telefone?: boolean
   }
 
-  export type clienteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"cpf" | "nome" | "telefone", ExtArgs["result"]["cliente"]>
+  export type clienteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"cpf" | "id_usuario" | "nome" | "telefone", ExtArgs["result"]["cliente"]>
+  export type clienteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usuario?: boolean | usuarioDefaultArgs<ExtArgs>
+  }
+  export type clienteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usuario?: boolean | usuarioDefaultArgs<ExtArgs>
+  }
+  export type clienteIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usuario?: boolean | usuarioDefaultArgs<ExtArgs>
+  }
 
   export type $clientePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "cliente"
-    objects: {}
+    objects: {
+      usuario: Prisma.$usuarioPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       cpf: bigint
+      id_usuario: number
       nome: string
       telefone: string | null
     }, ExtArgs["result"]["cliente"]>
@@ -5221,6 +5317,7 @@ export namespace Prisma {
    */
   export interface Prisma__clienteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    usuario<T extends usuarioDefaultArgs<ExtArgs> = {}>(args?: Subset<T, usuarioDefaultArgs<ExtArgs>>): Prisma__usuarioClient<$Result.GetResult<Prisma.$usuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5251,6 +5348,7 @@ export namespace Prisma {
    */
   interface clienteFieldRefs {
     readonly cpf: FieldRef<"cliente", 'BigInt'>
+    readonly id_usuario: FieldRef<"cliente", 'Int'>
     readonly nome: FieldRef<"cliente", 'String'>
     readonly telefone: FieldRef<"cliente", 'String'>
   }
@@ -5270,6 +5368,10 @@ export namespace Prisma {
      */
     omit?: clienteOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: clienteInclude<ExtArgs> | null
+    /**
      * Filter, which cliente to fetch.
      */
     where: clienteWhereUniqueInput
@@ -5288,6 +5390,10 @@ export namespace Prisma {
      */
     omit?: clienteOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: clienteInclude<ExtArgs> | null
+    /**
      * Filter, which cliente to fetch.
      */
     where: clienteWhereUniqueInput
@@ -5305,6 +5411,10 @@ export namespace Prisma {
      * Omit specific fields from the cliente
      */
     omit?: clienteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: clienteInclude<ExtArgs> | null
     /**
      * Filter, which cliente to fetch.
      */
@@ -5354,6 +5464,10 @@ export namespace Prisma {
      */
     omit?: clienteOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: clienteInclude<ExtArgs> | null
+    /**
      * Filter, which cliente to fetch.
      */
     where?: clienteWhereInput
@@ -5402,6 +5516,10 @@ export namespace Prisma {
      */
     omit?: clienteOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: clienteInclude<ExtArgs> | null
+    /**
      * Filter, which clientes to fetch.
      */
     where?: clienteWhereInput
@@ -5445,6 +5563,10 @@ export namespace Prisma {
      */
     omit?: clienteOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: clienteInclude<ExtArgs> | null
+    /**
      * The data needed to create a cliente.
      */
     data: XOR<clienteCreateInput, clienteUncheckedCreateInput>
@@ -5478,6 +5600,10 @@ export namespace Prisma {
      */
     data: clienteCreateManyInput | clienteCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: clienteIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -5492,6 +5618,10 @@ export namespace Prisma {
      * Omit specific fields from the cliente
      */
     omit?: clienteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: clienteInclude<ExtArgs> | null
     /**
      * The data needed to update a cliente.
      */
@@ -5544,6 +5674,10 @@ export namespace Prisma {
      * Limit how many clientes to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: clienteIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -5558,6 +5692,10 @@ export namespace Prisma {
      * Omit specific fields from the cliente
      */
     omit?: clienteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: clienteInclude<ExtArgs> | null
     /**
      * The filter to search for the cliente to update in case it exists.
      */
@@ -5584,6 +5722,10 @@ export namespace Prisma {
      * Omit specific fields from the cliente
      */
     omit?: clienteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: clienteInclude<ExtArgs> | null
     /**
      * Filter which cliente to delete.
      */
@@ -5616,6 +5758,10 @@ export namespace Prisma {
      * Omit specific fields from the cliente
      */
     omit?: clienteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: clienteInclude<ExtArgs> | null
   }
 
 
@@ -5641,24 +5787,27 @@ export namespace Prisma {
 
   export type UsuarioMinAggregateOutputType = {
     id_usuario: number | null
+    nome: string | null
     email: string | null
-    senha: string | null
+    password_hash: string | null
     tipo: $Enums.tipo_usuario | null
     ativo: boolean | null
   }
 
   export type UsuarioMaxAggregateOutputType = {
     id_usuario: number | null
+    nome: string | null
     email: string | null
-    senha: string | null
+    password_hash: string | null
     tipo: $Enums.tipo_usuario | null
     ativo: boolean | null
   }
 
   export type UsuarioCountAggregateOutputType = {
     id_usuario: number
+    nome: number
     email: number
-    senha: number
+    password_hash: number
     tipo: number
     ativo: number
     _all: number
@@ -5675,24 +5824,27 @@ export namespace Prisma {
 
   export type UsuarioMinAggregateInputType = {
     id_usuario?: true
+    nome?: true
     email?: true
-    senha?: true
+    password_hash?: true
     tipo?: true
     ativo?: true
   }
 
   export type UsuarioMaxAggregateInputType = {
     id_usuario?: true
+    nome?: true
     email?: true
-    senha?: true
+    password_hash?: true
     tipo?: true
     ativo?: true
   }
 
   export type UsuarioCountAggregateInputType = {
     id_usuario?: true
+    nome?: true
     email?: true
-    senha?: true
+    password_hash?: true
     tipo?: true
     ativo?: true
     _all?: true
@@ -5786,8 +5938,9 @@ export namespace Prisma {
 
   export type UsuarioGroupByOutputType = {
     id_usuario: number
+    nome: string
     email: string
-    senha: string
+    password_hash: string
     tipo: $Enums.tipo_usuario
     ativo: boolean
     _count: UsuarioCountAggregateOutputType | null
@@ -5813,45 +5966,63 @@ export namespace Prisma {
 
   export type usuarioSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id_usuario?: boolean
+    nome?: boolean
     email?: boolean
-    senha?: boolean
+    password_hash?: boolean
     tipo?: boolean
     ativo?: boolean
+    cliente?: boolean | usuario$clienteArgs<ExtArgs>
+    funcionario?: boolean | usuario$funcionarioArgs<ExtArgs>
+    _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["usuario"]>
 
   export type usuarioSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id_usuario?: boolean
+    nome?: boolean
     email?: boolean
-    senha?: boolean
+    password_hash?: boolean
     tipo?: boolean
     ativo?: boolean
   }, ExtArgs["result"]["usuario"]>
 
   export type usuarioSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id_usuario?: boolean
+    nome?: boolean
     email?: boolean
-    senha?: boolean
+    password_hash?: boolean
     tipo?: boolean
     ativo?: boolean
   }, ExtArgs["result"]["usuario"]>
 
   export type usuarioSelectScalar = {
     id_usuario?: boolean
+    nome?: boolean
     email?: boolean
-    senha?: boolean
+    password_hash?: boolean
     tipo?: boolean
     ativo?: boolean
   }
 
-  export type usuarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_usuario" | "email" | "senha" | "tipo" | "ativo", ExtArgs["result"]["usuario"]>
+  export type usuarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_usuario" | "nome" | "email" | "password_hash" | "tipo" | "ativo", ExtArgs["result"]["usuario"]>
+  export type usuarioInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    cliente?: boolean | usuario$clienteArgs<ExtArgs>
+    funcionario?: boolean | usuario$funcionarioArgs<ExtArgs>
+    _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type usuarioIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type usuarioIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $usuarioPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "usuario"
-    objects: {}
+    objects: {
+      cliente: Prisma.$clientePayload<ExtArgs> | null
+      funcionario: Prisma.$funcionarioPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id_usuario: number
+      nome: string
       email: string
-      senha: string
+      password_hash: string
       tipo: $Enums.tipo_usuario
       ativo: boolean
     }, ExtArgs["result"]["usuario"]>
@@ -6248,6 +6419,8 @@ export namespace Prisma {
    */
   export interface Prisma__usuarioClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    cliente<T extends usuario$clienteArgs<ExtArgs> = {}>(args?: Subset<T, usuario$clienteArgs<ExtArgs>>): Prisma__clienteClient<$Result.GetResult<Prisma.$clientePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    funcionario<T extends usuario$funcionarioArgs<ExtArgs> = {}>(args?: Subset<T, usuario$funcionarioArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$funcionarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6278,8 +6451,9 @@ export namespace Prisma {
    */
   interface usuarioFieldRefs {
     readonly id_usuario: FieldRef<"usuario", 'Int'>
+    readonly nome: FieldRef<"usuario", 'String'>
     readonly email: FieldRef<"usuario", 'String'>
-    readonly senha: FieldRef<"usuario", 'String'>
+    readonly password_hash: FieldRef<"usuario", 'String'>
     readonly tipo: FieldRef<"usuario", 'tipo_usuario'>
     readonly ativo: FieldRef<"usuario", 'Boolean'>
   }
@@ -6299,6 +6473,10 @@ export namespace Prisma {
      */
     omit?: usuarioOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usuarioInclude<ExtArgs> | null
+    /**
      * Filter, which usuario to fetch.
      */
     where: usuarioWhereUniqueInput
@@ -6317,6 +6495,10 @@ export namespace Prisma {
      */
     omit?: usuarioOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usuarioInclude<ExtArgs> | null
+    /**
      * Filter, which usuario to fetch.
      */
     where: usuarioWhereUniqueInput
@@ -6334,6 +6516,10 @@ export namespace Prisma {
      * Omit specific fields from the usuario
      */
     omit?: usuarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usuarioInclude<ExtArgs> | null
     /**
      * Filter, which usuario to fetch.
      */
@@ -6383,6 +6569,10 @@ export namespace Prisma {
      */
     omit?: usuarioOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usuarioInclude<ExtArgs> | null
+    /**
      * Filter, which usuario to fetch.
      */
     where?: usuarioWhereInput
@@ -6431,6 +6621,10 @@ export namespace Prisma {
      */
     omit?: usuarioOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usuarioInclude<ExtArgs> | null
+    /**
      * Filter, which usuarios to fetch.
      */
     where?: usuarioWhereInput
@@ -6473,6 +6667,10 @@ export namespace Prisma {
      * Omit specific fields from the usuario
      */
     omit?: usuarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usuarioInclude<ExtArgs> | null
     /**
      * The data needed to create a usuario.
      */
@@ -6521,6 +6719,10 @@ export namespace Prisma {
      * Omit specific fields from the usuario
      */
     omit?: usuarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usuarioInclude<ExtArgs> | null
     /**
      * The data needed to update a usuario.
      */
@@ -6588,6 +6790,10 @@ export namespace Prisma {
      */
     omit?: usuarioOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usuarioInclude<ExtArgs> | null
+    /**
      * The filter to search for the usuario to update in case it exists.
      */
     where: usuarioWhereUniqueInput
@@ -6614,6 +6820,10 @@ export namespace Prisma {
      */
     omit?: usuarioOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usuarioInclude<ExtArgs> | null
+    /**
      * Filter which usuario to delete.
      */
     where: usuarioWhereUniqueInput
@@ -6634,6 +6844,49 @@ export namespace Prisma {
   }
 
   /**
+   * usuario.cliente
+   */
+  export type usuario$clienteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the cliente
+     */
+    select?: clienteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the cliente
+     */
+    omit?: clienteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: clienteInclude<ExtArgs> | null
+    where?: clienteWhereInput
+  }
+
+  /**
+   * usuario.funcionario
+   */
+  export type usuario$funcionarioArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the funcionario
+     */
+    select?: funcionarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the funcionario
+     */
+    omit?: funcionarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: funcionarioInclude<ExtArgs> | null
+    where?: funcionarioWhereInput
+    orderBy?: funcionarioOrderByWithRelationInput | funcionarioOrderByWithRelationInput[]
+    cursor?: funcionarioWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FuncionarioScalarFieldEnum | FuncionarioScalarFieldEnum[]
+  }
+
+  /**
    * usuario without action
    */
   export type usuarioDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6645,6 +6898,10 @@ export namespace Prisma {
      * Omit specific fields from the usuario
      */
     omit?: usuarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usuarioInclude<ExtArgs> | null
   }
 
 
@@ -6664,6 +6921,7 @@ export namespace Prisma {
 
   export const FuncionarioScalarFieldEnum: {
     cpf: 'cpf',
+    id_usuario: 'id_usuario',
     nome: 'nome',
     telefone: 'telefone'
   };
@@ -6696,6 +6954,7 @@ export namespace Prisma {
 
   export const ClienteScalarFieldEnum: {
     cpf: 'cpf',
+    id_usuario: 'id_usuario',
     nome: 'nome',
     telefone: 'telefone'
   };
@@ -6705,8 +6964,9 @@ export namespace Prisma {
 
   export const UsuarioScalarFieldEnum: {
     id_usuario: 'id_usuario',
+    nome: 'nome',
     email: 'email',
-    senha: 'senha',
+    password_hash: 'password_hash',
     tipo: 'tipo',
     ativo: 'ativo'
   };
@@ -6758,20 +7018,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'String'
-   */
-  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
-    
-
-
-  /**
-   * Reference to a field of type 'String[]'
-   */
-  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
-    
-
-
-  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -6782,6 +7028,20 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'String'
+   */
+  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
+    
+
+
+  /**
+   * Reference to a field of type 'String[]'
+   */
+  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
     
 
 
@@ -6856,15 +7116,19 @@ export namespace Prisma {
     OR?: funcionarioWhereInput[]
     NOT?: funcionarioWhereInput | funcionarioWhereInput[]
     cpf?: BigIntFilter<"funcionario"> | bigint | number
+    id_usuario?: IntFilter<"funcionario"> | number
     nome?: StringFilter<"funcionario"> | string
     telefone?: StringNullableFilter<"funcionario"> | string | null
+    usuario?: XOR<UsuarioScalarRelationFilter, usuarioWhereInput>
     revisao?: RevisaoListRelationFilter
   }
 
   export type funcionarioOrderByWithRelationInput = {
     cpf?: SortOrder
+    id_usuario?: SortOrder
     nome?: SortOrder
     telefone?: SortOrderInput | SortOrder
+    usuario?: usuarioOrderByWithRelationInput
     revisao?: revisaoOrderByRelationAggregateInput
   }
 
@@ -6873,13 +7137,16 @@ export namespace Prisma {
     AND?: funcionarioWhereInput | funcionarioWhereInput[]
     OR?: funcionarioWhereInput[]
     NOT?: funcionarioWhereInput | funcionarioWhereInput[]
+    id_usuario?: IntFilter<"funcionario"> | number
     nome?: StringFilter<"funcionario"> | string
     telefone?: StringNullableFilter<"funcionario"> | string | null
+    usuario?: XOR<UsuarioScalarRelationFilter, usuarioWhereInput>
     revisao?: RevisaoListRelationFilter
   }, "cpf">
 
   export type funcionarioOrderByWithAggregationInput = {
     cpf?: SortOrder
+    id_usuario?: SortOrder
     nome?: SortOrder
     telefone?: SortOrderInput | SortOrder
     _count?: funcionarioCountOrderByAggregateInput
@@ -6894,6 +7161,7 @@ export namespace Prisma {
     OR?: funcionarioScalarWhereWithAggregatesInput[]
     NOT?: funcionarioScalarWhereWithAggregatesInput | funcionarioScalarWhereWithAggregatesInput[]
     cpf?: BigIntWithAggregatesFilter<"funcionario"> | bigint | number
+    id_usuario?: IntWithAggregatesFilter<"funcionario"> | number
     nome?: StringWithAggregatesFilter<"funcionario"> | string
     telefone?: StringNullableWithAggregatesFilter<"funcionario"> | string | null
   }
@@ -7025,27 +7293,34 @@ export namespace Prisma {
     OR?: clienteWhereInput[]
     NOT?: clienteWhereInput | clienteWhereInput[]
     cpf?: BigIntFilter<"cliente"> | bigint | number
+    id_usuario?: IntFilter<"cliente"> | number
     nome?: StringFilter<"cliente"> | string
     telefone?: StringNullableFilter<"cliente"> | string | null
+    usuario?: XOR<UsuarioScalarRelationFilter, usuarioWhereInput>
   }
 
   export type clienteOrderByWithRelationInput = {
     cpf?: SortOrder
+    id_usuario?: SortOrder
     nome?: SortOrder
     telefone?: SortOrderInput | SortOrder
+    usuario?: usuarioOrderByWithRelationInput
   }
 
   export type clienteWhereUniqueInput = Prisma.AtLeast<{
     cpf?: bigint | number
+    id_usuario?: number
     AND?: clienteWhereInput | clienteWhereInput[]
     OR?: clienteWhereInput[]
     NOT?: clienteWhereInput | clienteWhereInput[]
     nome?: StringFilter<"cliente"> | string
     telefone?: StringNullableFilter<"cliente"> | string | null
-  }, "cpf">
+    usuario?: XOR<UsuarioScalarRelationFilter, usuarioWhereInput>
+  }, "cpf" | "id_usuario">
 
   export type clienteOrderByWithAggregationInput = {
     cpf?: SortOrder
+    id_usuario?: SortOrder
     nome?: SortOrder
     telefone?: SortOrderInput | SortOrder
     _count?: clienteCountOrderByAggregateInput
@@ -7060,6 +7335,7 @@ export namespace Prisma {
     OR?: clienteScalarWhereWithAggregatesInput[]
     NOT?: clienteScalarWhereWithAggregatesInput | clienteScalarWhereWithAggregatesInput[]
     cpf?: BigIntWithAggregatesFilter<"cliente"> | bigint | number
+    id_usuario?: IntWithAggregatesFilter<"cliente"> | number
     nome?: StringWithAggregatesFilter<"cliente"> | string
     telefone?: StringNullableWithAggregatesFilter<"cliente"> | string | null
   }
@@ -7069,35 +7345,45 @@ export namespace Prisma {
     OR?: usuarioWhereInput[]
     NOT?: usuarioWhereInput | usuarioWhereInput[]
     id_usuario?: IntFilter<"usuario"> | number
+    nome?: StringFilter<"usuario"> | string
     email?: StringFilter<"usuario"> | string
-    senha?: StringFilter<"usuario"> | string
+    password_hash?: StringFilter<"usuario"> | string
     tipo?: Enumtipo_usuarioFilter<"usuario"> | $Enums.tipo_usuario
     ativo?: BoolFilter<"usuario"> | boolean
+    cliente?: XOR<ClienteNullableScalarRelationFilter, clienteWhereInput> | null
+    funcionario?: FuncionarioListRelationFilter
   }
 
   export type usuarioOrderByWithRelationInput = {
     id_usuario?: SortOrder
+    nome?: SortOrder
     email?: SortOrder
-    senha?: SortOrder
+    password_hash?: SortOrder
     tipo?: SortOrder
     ativo?: SortOrder
+    cliente?: clienteOrderByWithRelationInput
+    funcionario?: funcionarioOrderByRelationAggregateInput
   }
 
   export type usuarioWhereUniqueInput = Prisma.AtLeast<{
     id_usuario?: number
     email?: string
-    senha?: string
     AND?: usuarioWhereInput | usuarioWhereInput[]
     OR?: usuarioWhereInput[]
     NOT?: usuarioWhereInput | usuarioWhereInput[]
+    nome?: StringFilter<"usuario"> | string
+    password_hash?: StringFilter<"usuario"> | string
     tipo?: Enumtipo_usuarioFilter<"usuario"> | $Enums.tipo_usuario
     ativo?: BoolFilter<"usuario"> | boolean
-  }, "id_usuario" | "email" | "senha">
+    cliente?: XOR<ClienteNullableScalarRelationFilter, clienteWhereInput> | null
+    funcionario?: FuncionarioListRelationFilter
+  }, "id_usuario" | "email">
 
   export type usuarioOrderByWithAggregationInput = {
     id_usuario?: SortOrder
+    nome?: SortOrder
     email?: SortOrder
-    senha?: SortOrder
+    password_hash?: SortOrder
     tipo?: SortOrder
     ativo?: SortOrder
     _count?: usuarioCountOrderByAggregateInput
@@ -7112,8 +7398,9 @@ export namespace Prisma {
     OR?: usuarioScalarWhereWithAggregatesInput[]
     NOT?: usuarioScalarWhereWithAggregatesInput | usuarioScalarWhereWithAggregatesInput[]
     id_usuario?: IntWithAggregatesFilter<"usuario"> | number
+    nome?: StringWithAggregatesFilter<"usuario"> | string
     email?: StringWithAggregatesFilter<"usuario"> | string
-    senha?: StringWithAggregatesFilter<"usuario"> | string
+    password_hash?: StringWithAggregatesFilter<"usuario"> | string
     tipo?: Enumtipo_usuarioWithAggregatesFilter<"usuario"> | $Enums.tipo_usuario
     ativo?: BoolWithAggregatesFilter<"usuario"> | boolean
   }
@@ -7122,11 +7409,13 @@ export namespace Prisma {
     cpf: bigint | number
     nome: string
     telefone?: string | null
+    usuario?: usuarioCreateNestedOneWithoutFuncionarioInput
     revisao?: revisaoCreateNestedManyWithoutFuncionarioInput
   }
 
   export type funcionarioUncheckedCreateInput = {
     cpf: bigint | number
+    id_usuario?: number
     nome: string
     telefone?: string | null
     revisao?: revisaoUncheckedCreateNestedManyWithoutFuncionarioInput
@@ -7136,11 +7425,13 @@ export namespace Prisma {
     cpf?: BigIntFieldUpdateOperationsInput | bigint | number
     nome?: StringFieldUpdateOperationsInput | string
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    usuario?: usuarioUpdateOneRequiredWithoutFuncionarioNestedInput
     revisao?: revisaoUpdateManyWithoutFuncionarioNestedInput
   }
 
   export type funcionarioUncheckedUpdateInput = {
     cpf?: BigIntFieldUpdateOperationsInput | bigint | number
+    id_usuario?: IntFieldUpdateOperationsInput | number
     nome?: StringFieldUpdateOperationsInput | string
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
     revisao?: revisaoUncheckedUpdateManyWithoutFuncionarioNestedInput
@@ -7148,6 +7439,7 @@ export namespace Prisma {
 
   export type funcionarioCreateManyInput = {
     cpf: bigint | number
+    id_usuario?: number
     nome: string
     telefone?: string | null
   }
@@ -7160,6 +7452,7 @@ export namespace Prisma {
 
   export type funcionarioUncheckedUpdateManyInput = {
     cpf?: BigIntFieldUpdateOperationsInput | bigint | number
+    id_usuario?: IntFieldUpdateOperationsInput | number
     nome?: StringFieldUpdateOperationsInput | string
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -7286,10 +7579,12 @@ export namespace Prisma {
     cpf: bigint | number
     nome: string
     telefone?: string | null
+    usuario?: usuarioCreateNestedOneWithoutClienteInput
   }
 
   export type clienteUncheckedCreateInput = {
     cpf: bigint | number
+    id_usuario?: number
     nome: string
     telefone?: string | null
   }
@@ -7298,16 +7593,19 @@ export namespace Prisma {
     cpf?: BigIntFieldUpdateOperationsInput | bigint | number
     nome?: StringFieldUpdateOperationsInput | string
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    usuario?: usuarioUpdateOneRequiredWithoutClienteNestedInput
   }
 
   export type clienteUncheckedUpdateInput = {
     cpf?: BigIntFieldUpdateOperationsInput | bigint | number
+    id_usuario?: IntFieldUpdateOperationsInput | number
     nome?: StringFieldUpdateOperationsInput | string
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type clienteCreateManyInput = {
     cpf: bigint | number
+    id_usuario?: number
     nome: string
     telefone?: string | null
   }
@@ -7320,59 +7618,75 @@ export namespace Prisma {
 
   export type clienteUncheckedUpdateManyInput = {
     cpf?: BigIntFieldUpdateOperationsInput | bigint | number
+    id_usuario?: IntFieldUpdateOperationsInput | number
     nome?: StringFieldUpdateOperationsInput | string
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type usuarioCreateInput = {
+    nome: string
     email: string
-    senha: string
-    tipo: $Enums.tipo_usuario
+    password_hash: string
+    tipo?: $Enums.tipo_usuario
     ativo: boolean
+    cliente?: clienteCreateNestedOneWithoutUsuarioInput
+    funcionario?: funcionarioCreateNestedManyWithoutUsuarioInput
   }
 
   export type usuarioUncheckedCreateInput = {
     id_usuario?: number
+    nome: string
     email: string
-    senha: string
-    tipo: $Enums.tipo_usuario
+    password_hash: string
+    tipo?: $Enums.tipo_usuario
     ativo: boolean
+    cliente?: clienteUncheckedCreateNestedOneWithoutUsuarioInput
+    funcionario?: funcionarioUncheckedCreateNestedManyWithoutUsuarioInput
   }
 
   export type usuarioUpdateInput = {
+    nome?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    senha?: StringFieldUpdateOperationsInput | string
+    password_hash?: StringFieldUpdateOperationsInput | string
     tipo?: Enumtipo_usuarioFieldUpdateOperationsInput | $Enums.tipo_usuario
     ativo?: BoolFieldUpdateOperationsInput | boolean
+    cliente?: clienteUpdateOneWithoutUsuarioNestedInput
+    funcionario?: funcionarioUpdateManyWithoutUsuarioNestedInput
   }
 
   export type usuarioUncheckedUpdateInput = {
     id_usuario?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    senha?: StringFieldUpdateOperationsInput | string
+    password_hash?: StringFieldUpdateOperationsInput | string
     tipo?: Enumtipo_usuarioFieldUpdateOperationsInput | $Enums.tipo_usuario
     ativo?: BoolFieldUpdateOperationsInput | boolean
+    cliente?: clienteUncheckedUpdateOneWithoutUsuarioNestedInput
+    funcionario?: funcionarioUncheckedUpdateManyWithoutUsuarioNestedInput
   }
 
   export type usuarioCreateManyInput = {
     id_usuario?: number
+    nome: string
     email: string
-    senha: string
-    tipo: $Enums.tipo_usuario
+    password_hash: string
+    tipo?: $Enums.tipo_usuario
     ativo: boolean
   }
 
   export type usuarioUpdateManyMutationInput = {
+    nome?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    senha?: StringFieldUpdateOperationsInput | string
+    password_hash?: StringFieldUpdateOperationsInput | string
     tipo?: Enumtipo_usuarioFieldUpdateOperationsInput | $Enums.tipo_usuario
     ativo?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type usuarioUncheckedUpdateManyInput = {
     id_usuario?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    senha?: StringFieldUpdateOperationsInput | string
+    password_hash?: StringFieldUpdateOperationsInput | string
     tipo?: Enumtipo_usuarioFieldUpdateOperationsInput | $Enums.tipo_usuario
     ativo?: BoolFieldUpdateOperationsInput | boolean
   }
@@ -7386,6 +7700,17 @@ export namespace Prisma {
     gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     not?: NestedBigIntFilter<$PrismaModel> | bigint | number
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -7418,6 +7743,11 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type UsuarioScalarRelationFilter = {
+    is?: usuarioWhereInput
+    isNot?: usuarioWhereInput
+  }
+
   export type RevisaoListRelationFilter = {
     every?: revisaoWhereInput
     some?: revisaoWhereInput
@@ -7435,28 +7765,33 @@ export namespace Prisma {
 
   export type funcionarioCountOrderByAggregateInput = {
     cpf?: SortOrder
+    id_usuario?: SortOrder
     nome?: SortOrder
     telefone?: SortOrder
   }
 
   export type funcionarioAvgOrderByAggregateInput = {
     cpf?: SortOrder
+    id_usuario?: SortOrder
   }
 
   export type funcionarioMaxOrderByAggregateInput = {
     cpf?: SortOrder
+    id_usuario?: SortOrder
     nome?: SortOrder
     telefone?: SortOrder
   }
 
   export type funcionarioMinOrderByAggregateInput = {
     cpf?: SortOrder
+    id_usuario?: SortOrder
     nome?: SortOrder
     telefone?: SortOrder
   }
 
   export type funcionarioSumOrderByAggregateInput = {
     cpf?: SortOrder
+    id_usuario?: SortOrder
   }
 
   export type BigIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -7473,6 +7808,22 @@ export namespace Prisma {
     _sum?: NestedBigIntFilter<$PrismaModel>
     _min?: NestedBigIntFilter<$PrismaModel>
     _max?: NestedBigIntFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -7509,17 +7860,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -7575,22 +7915,6 @@ export namespace Prisma {
   export type revisaoSumOrderByAggregateInput = {
     id_revisao?: SortOrder
     cpf_funcionario?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -7661,28 +7985,33 @@ export namespace Prisma {
 
   export type clienteCountOrderByAggregateInput = {
     cpf?: SortOrder
+    id_usuario?: SortOrder
     nome?: SortOrder
     telefone?: SortOrder
   }
 
   export type clienteAvgOrderByAggregateInput = {
     cpf?: SortOrder
+    id_usuario?: SortOrder
   }
 
   export type clienteMaxOrderByAggregateInput = {
     cpf?: SortOrder
+    id_usuario?: SortOrder
     nome?: SortOrder
     telefone?: SortOrder
   }
 
   export type clienteMinOrderByAggregateInput = {
     cpf?: SortOrder
+    id_usuario?: SortOrder
     nome?: SortOrder
     telefone?: SortOrder
   }
 
   export type clienteSumOrderByAggregateInput = {
     cpf?: SortOrder
+    id_usuario?: SortOrder
   }
 
   export type Enumtipo_usuarioFilter<$PrismaModel = never> = {
@@ -7697,10 +8026,26 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type ClienteNullableScalarRelationFilter = {
+    is?: clienteWhereInput | null
+    isNot?: clienteWhereInput | null
+  }
+
+  export type FuncionarioListRelationFilter = {
+    every?: funcionarioWhereInput
+    some?: funcionarioWhereInput
+    none?: funcionarioWhereInput
+  }
+
+  export type funcionarioOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type usuarioCountOrderByAggregateInput = {
     id_usuario?: SortOrder
+    nome?: SortOrder
     email?: SortOrder
-    senha?: SortOrder
+    password_hash?: SortOrder
     tipo?: SortOrder
     ativo?: SortOrder
   }
@@ -7711,16 +8056,18 @@ export namespace Prisma {
 
   export type usuarioMaxOrderByAggregateInput = {
     id_usuario?: SortOrder
+    nome?: SortOrder
     email?: SortOrder
-    senha?: SortOrder
+    password_hash?: SortOrder
     tipo?: SortOrder
     ativo?: SortOrder
   }
 
   export type usuarioMinOrderByAggregateInput = {
     id_usuario?: SortOrder
+    nome?: SortOrder
     email?: SortOrder
-    senha?: SortOrder
+    password_hash?: SortOrder
     tipo?: SortOrder
     ativo?: SortOrder
   }
@@ -7745,6 +8092,12 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type usuarioCreateNestedOneWithoutFuncionarioInput = {
+    create?: XOR<usuarioCreateWithoutFuncionarioInput, usuarioUncheckedCreateWithoutFuncionarioInput>
+    connectOrCreate?: usuarioCreateOrConnectWithoutFuncionarioInput
+    connect?: usuarioWhereUniqueInput
   }
 
   export type revisaoCreateNestedManyWithoutFuncionarioInput = {
@@ -7777,6 +8130,14 @@ export namespace Prisma {
     set?: string | null
   }
 
+  export type usuarioUpdateOneRequiredWithoutFuncionarioNestedInput = {
+    create?: XOR<usuarioCreateWithoutFuncionarioInput, usuarioUncheckedCreateWithoutFuncionarioInput>
+    connectOrCreate?: usuarioCreateOrConnectWithoutFuncionarioInput
+    upsert?: usuarioUpsertWithoutFuncionarioInput
+    connect?: usuarioWhereUniqueInput
+    update?: XOR<XOR<usuarioUpdateToOneWithWhereWithoutFuncionarioInput, usuarioUpdateWithoutFuncionarioInput>, usuarioUncheckedUpdateWithoutFuncionarioInput>
+  }
+
   export type revisaoUpdateManyWithoutFuncionarioNestedInput = {
     create?: XOR<revisaoCreateWithoutFuncionarioInput, revisaoUncheckedCreateWithoutFuncionarioInput> | revisaoCreateWithoutFuncionarioInput[] | revisaoUncheckedCreateWithoutFuncionarioInput[]
     connectOrCreate?: revisaoCreateOrConnectWithoutFuncionarioInput | revisaoCreateOrConnectWithoutFuncionarioInput[]
@@ -7789,6 +8150,14 @@ export namespace Prisma {
     update?: revisaoUpdateWithWhereUniqueWithoutFuncionarioInput | revisaoUpdateWithWhereUniqueWithoutFuncionarioInput[]
     updateMany?: revisaoUpdateManyWithWhereWithoutFuncionarioInput | revisaoUpdateManyWithWhereWithoutFuncionarioInput[]
     deleteMany?: revisaoScalarWhereInput | revisaoScalarWhereInput[]
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type revisaoUncheckedUpdateManyWithoutFuncionarioNestedInput = {
@@ -7837,14 +8206,6 @@ export namespace Prisma {
     update?: XOR<XOR<veiculoUpdateToOneWithWhereWithoutRevisaoInput, veiculoUpdateWithoutRevisaoInput>, veiculoUncheckedUpdateWithoutRevisaoInput>
   }
 
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
   export type revisaoCreateNestedManyWithoutVeiculoInput = {
     create?: XOR<revisaoCreateWithoutVeiculoInput, revisaoUncheckedCreateWithoutVeiculoInput> | revisaoCreateWithoutVeiculoInput[] | revisaoUncheckedCreateWithoutVeiculoInput[]
     connectOrCreate?: revisaoCreateOrConnectWithoutVeiculoInput | revisaoCreateOrConnectWithoutVeiculoInput[]
@@ -7891,12 +8252,100 @@ export namespace Prisma {
     deleteMany?: revisaoScalarWhereInput | revisaoScalarWhereInput[]
   }
 
+  export type usuarioCreateNestedOneWithoutClienteInput = {
+    create?: XOR<usuarioCreateWithoutClienteInput, usuarioUncheckedCreateWithoutClienteInput>
+    connectOrCreate?: usuarioCreateOrConnectWithoutClienteInput
+    connect?: usuarioWhereUniqueInput
+  }
+
+  export type usuarioUpdateOneRequiredWithoutClienteNestedInput = {
+    create?: XOR<usuarioCreateWithoutClienteInput, usuarioUncheckedCreateWithoutClienteInput>
+    connectOrCreate?: usuarioCreateOrConnectWithoutClienteInput
+    upsert?: usuarioUpsertWithoutClienteInput
+    connect?: usuarioWhereUniqueInput
+    update?: XOR<XOR<usuarioUpdateToOneWithWhereWithoutClienteInput, usuarioUpdateWithoutClienteInput>, usuarioUncheckedUpdateWithoutClienteInput>
+  }
+
+  export type clienteCreateNestedOneWithoutUsuarioInput = {
+    create?: XOR<clienteCreateWithoutUsuarioInput, clienteUncheckedCreateWithoutUsuarioInput>
+    connectOrCreate?: clienteCreateOrConnectWithoutUsuarioInput
+    connect?: clienteWhereUniqueInput
+  }
+
+  export type funcionarioCreateNestedManyWithoutUsuarioInput = {
+    create?: XOR<funcionarioCreateWithoutUsuarioInput, funcionarioUncheckedCreateWithoutUsuarioInput> | funcionarioCreateWithoutUsuarioInput[] | funcionarioUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: funcionarioCreateOrConnectWithoutUsuarioInput | funcionarioCreateOrConnectWithoutUsuarioInput[]
+    createMany?: funcionarioCreateManyUsuarioInputEnvelope
+    connect?: funcionarioWhereUniqueInput | funcionarioWhereUniqueInput[]
+  }
+
+  export type clienteUncheckedCreateNestedOneWithoutUsuarioInput = {
+    create?: XOR<clienteCreateWithoutUsuarioInput, clienteUncheckedCreateWithoutUsuarioInput>
+    connectOrCreate?: clienteCreateOrConnectWithoutUsuarioInput
+    connect?: clienteWhereUniqueInput
+  }
+
+  export type funcionarioUncheckedCreateNestedManyWithoutUsuarioInput = {
+    create?: XOR<funcionarioCreateWithoutUsuarioInput, funcionarioUncheckedCreateWithoutUsuarioInput> | funcionarioCreateWithoutUsuarioInput[] | funcionarioUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: funcionarioCreateOrConnectWithoutUsuarioInput | funcionarioCreateOrConnectWithoutUsuarioInput[]
+    createMany?: funcionarioCreateManyUsuarioInputEnvelope
+    connect?: funcionarioWhereUniqueInput | funcionarioWhereUniqueInput[]
+  }
+
   export type Enumtipo_usuarioFieldUpdateOperationsInput = {
     set?: $Enums.tipo_usuario
   }
 
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
+  }
+
+  export type clienteUpdateOneWithoutUsuarioNestedInput = {
+    create?: XOR<clienteCreateWithoutUsuarioInput, clienteUncheckedCreateWithoutUsuarioInput>
+    connectOrCreate?: clienteCreateOrConnectWithoutUsuarioInput
+    upsert?: clienteUpsertWithoutUsuarioInput
+    disconnect?: clienteWhereInput | boolean
+    delete?: clienteWhereInput | boolean
+    connect?: clienteWhereUniqueInput
+    update?: XOR<XOR<clienteUpdateToOneWithWhereWithoutUsuarioInput, clienteUpdateWithoutUsuarioInput>, clienteUncheckedUpdateWithoutUsuarioInput>
+  }
+
+  export type funcionarioUpdateManyWithoutUsuarioNestedInput = {
+    create?: XOR<funcionarioCreateWithoutUsuarioInput, funcionarioUncheckedCreateWithoutUsuarioInput> | funcionarioCreateWithoutUsuarioInput[] | funcionarioUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: funcionarioCreateOrConnectWithoutUsuarioInput | funcionarioCreateOrConnectWithoutUsuarioInput[]
+    upsert?: funcionarioUpsertWithWhereUniqueWithoutUsuarioInput | funcionarioUpsertWithWhereUniqueWithoutUsuarioInput[]
+    createMany?: funcionarioCreateManyUsuarioInputEnvelope
+    set?: funcionarioWhereUniqueInput | funcionarioWhereUniqueInput[]
+    disconnect?: funcionarioWhereUniqueInput | funcionarioWhereUniqueInput[]
+    delete?: funcionarioWhereUniqueInput | funcionarioWhereUniqueInput[]
+    connect?: funcionarioWhereUniqueInput | funcionarioWhereUniqueInput[]
+    update?: funcionarioUpdateWithWhereUniqueWithoutUsuarioInput | funcionarioUpdateWithWhereUniqueWithoutUsuarioInput[]
+    updateMany?: funcionarioUpdateManyWithWhereWithoutUsuarioInput | funcionarioUpdateManyWithWhereWithoutUsuarioInput[]
+    deleteMany?: funcionarioScalarWhereInput | funcionarioScalarWhereInput[]
+  }
+
+  export type clienteUncheckedUpdateOneWithoutUsuarioNestedInput = {
+    create?: XOR<clienteCreateWithoutUsuarioInput, clienteUncheckedCreateWithoutUsuarioInput>
+    connectOrCreate?: clienteCreateOrConnectWithoutUsuarioInput
+    upsert?: clienteUpsertWithoutUsuarioInput
+    disconnect?: clienteWhereInput | boolean
+    delete?: clienteWhereInput | boolean
+    connect?: clienteWhereUniqueInput
+    update?: XOR<XOR<clienteUpdateToOneWithWhereWithoutUsuarioInput, clienteUpdateWithoutUsuarioInput>, clienteUncheckedUpdateWithoutUsuarioInput>
+  }
+
+  export type funcionarioUncheckedUpdateManyWithoutUsuarioNestedInput = {
+    create?: XOR<funcionarioCreateWithoutUsuarioInput, funcionarioUncheckedCreateWithoutUsuarioInput> | funcionarioCreateWithoutUsuarioInput[] | funcionarioUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: funcionarioCreateOrConnectWithoutUsuarioInput | funcionarioCreateOrConnectWithoutUsuarioInput[]
+    upsert?: funcionarioUpsertWithWhereUniqueWithoutUsuarioInput | funcionarioUpsertWithWhereUniqueWithoutUsuarioInput[]
+    createMany?: funcionarioCreateManyUsuarioInputEnvelope
+    set?: funcionarioWhereUniqueInput | funcionarioWhereUniqueInput[]
+    disconnect?: funcionarioWhereUniqueInput | funcionarioWhereUniqueInput[]
+    delete?: funcionarioWhereUniqueInput | funcionarioWhereUniqueInput[]
+    connect?: funcionarioWhereUniqueInput | funcionarioWhereUniqueInput[]
+    update?: funcionarioUpdateWithWhereUniqueWithoutUsuarioInput | funcionarioUpdateWithWhereUniqueWithoutUsuarioInput[]
+    updateMany?: funcionarioUpdateManyWithWhereWithoutUsuarioInput | funcionarioUpdateManyWithWhereWithoutUsuarioInput[]
+    deleteMany?: funcionarioScalarWhereInput | funcionarioScalarWhereInput[]
   }
 
   export type NestedBigIntFilter<$PrismaModel = never> = {
@@ -7908,6 +8357,17 @@ export namespace Prisma {
     gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     not?: NestedBigIntFilter<$PrismaModel> | bigint | number
+  }
+
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -7954,17 +8414,6 @@ export namespace Prisma {
     _max?: NestedBigIntFilter<$PrismaModel>
   }
 
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type NestedFloatFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -7974,6 +8423,22 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -8030,22 +8495,6 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -8109,6 +8558,30 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type usuarioCreateWithoutFuncionarioInput = {
+    nome: string
+    email: string
+    password_hash: string
+    tipo?: $Enums.tipo_usuario
+    ativo: boolean
+    cliente?: clienteCreateNestedOneWithoutUsuarioInput
+  }
+
+  export type usuarioUncheckedCreateWithoutFuncionarioInput = {
+    id_usuario?: number
+    nome: string
+    email: string
+    password_hash: string
+    tipo?: $Enums.tipo_usuario
+    ativo: boolean
+    cliente?: clienteUncheckedCreateNestedOneWithoutUsuarioInput
+  }
+
+  export type usuarioCreateOrConnectWithoutFuncionarioInput = {
+    where: usuarioWhereUniqueInput
+    create: XOR<usuarioCreateWithoutFuncionarioInput, usuarioUncheckedCreateWithoutFuncionarioInput>
+  }
+
   export type revisaoCreateWithoutFuncionarioInput = {
     data_revisao: Date | string
     data_prox_revisao: Date | string
@@ -8130,6 +8603,36 @@ export namespace Prisma {
   export type revisaoCreateManyFuncionarioInputEnvelope = {
     data: revisaoCreateManyFuncionarioInput | revisaoCreateManyFuncionarioInput[]
     skipDuplicates?: boolean
+  }
+
+  export type usuarioUpsertWithoutFuncionarioInput = {
+    update: XOR<usuarioUpdateWithoutFuncionarioInput, usuarioUncheckedUpdateWithoutFuncionarioInput>
+    create: XOR<usuarioCreateWithoutFuncionarioInput, usuarioUncheckedCreateWithoutFuncionarioInput>
+    where?: usuarioWhereInput
+  }
+
+  export type usuarioUpdateToOneWithWhereWithoutFuncionarioInput = {
+    where?: usuarioWhereInput
+    data: XOR<usuarioUpdateWithoutFuncionarioInput, usuarioUncheckedUpdateWithoutFuncionarioInput>
+  }
+
+  export type usuarioUpdateWithoutFuncionarioInput = {
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password_hash?: StringFieldUpdateOperationsInput | string
+    tipo?: Enumtipo_usuarioFieldUpdateOperationsInput | $Enums.tipo_usuario
+    ativo?: BoolFieldUpdateOperationsInput | boolean
+    cliente?: clienteUpdateOneWithoutUsuarioNestedInput
+  }
+
+  export type usuarioUncheckedUpdateWithoutFuncionarioInput = {
+    id_usuario?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password_hash?: StringFieldUpdateOperationsInput | string
+    tipo?: Enumtipo_usuarioFieldUpdateOperationsInput | $Enums.tipo_usuario
+    ativo?: BoolFieldUpdateOperationsInput | boolean
+    cliente?: clienteUncheckedUpdateOneWithoutUsuarioNestedInput
   }
 
   export type revisaoUpsertWithWhereUniqueWithoutFuncionarioInput = {
@@ -8163,10 +8666,12 @@ export namespace Prisma {
     cpf: bigint | number
     nome: string
     telefone?: string | null
+    usuario?: usuarioCreateNestedOneWithoutFuncionarioInput
   }
 
   export type funcionarioUncheckedCreateWithoutRevisaoInput = {
     cpf: bigint | number
+    id_usuario?: number
     nome: string
     telefone?: string | null
   }
@@ -8214,10 +8719,12 @@ export namespace Prisma {
     cpf?: BigIntFieldUpdateOperationsInput | bigint | number
     nome?: StringFieldUpdateOperationsInput | string
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    usuario?: usuarioUpdateOneRequiredWithoutFuncionarioNestedInput
   }
 
   export type funcionarioUncheckedUpdateWithoutRevisaoInput = {
     cpf?: BigIntFieldUpdateOperationsInput | bigint | number
+    id_usuario?: IntFieldUpdateOperationsInput | number
     nome?: StringFieldUpdateOperationsInput | string
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -8290,6 +8797,150 @@ export namespace Prisma {
     data: XOR<revisaoUpdateManyMutationInput, revisaoUncheckedUpdateManyWithoutVeiculoInput>
   }
 
+  export type usuarioCreateWithoutClienteInput = {
+    nome: string
+    email: string
+    password_hash: string
+    tipo?: $Enums.tipo_usuario
+    ativo: boolean
+    funcionario?: funcionarioCreateNestedManyWithoutUsuarioInput
+  }
+
+  export type usuarioUncheckedCreateWithoutClienteInput = {
+    id_usuario?: number
+    nome: string
+    email: string
+    password_hash: string
+    tipo?: $Enums.tipo_usuario
+    ativo: boolean
+    funcionario?: funcionarioUncheckedCreateNestedManyWithoutUsuarioInput
+  }
+
+  export type usuarioCreateOrConnectWithoutClienteInput = {
+    where: usuarioWhereUniqueInput
+    create: XOR<usuarioCreateWithoutClienteInput, usuarioUncheckedCreateWithoutClienteInput>
+  }
+
+  export type usuarioUpsertWithoutClienteInput = {
+    update: XOR<usuarioUpdateWithoutClienteInput, usuarioUncheckedUpdateWithoutClienteInput>
+    create: XOR<usuarioCreateWithoutClienteInput, usuarioUncheckedCreateWithoutClienteInput>
+    where?: usuarioWhereInput
+  }
+
+  export type usuarioUpdateToOneWithWhereWithoutClienteInput = {
+    where?: usuarioWhereInput
+    data: XOR<usuarioUpdateWithoutClienteInput, usuarioUncheckedUpdateWithoutClienteInput>
+  }
+
+  export type usuarioUpdateWithoutClienteInput = {
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password_hash?: StringFieldUpdateOperationsInput | string
+    tipo?: Enumtipo_usuarioFieldUpdateOperationsInput | $Enums.tipo_usuario
+    ativo?: BoolFieldUpdateOperationsInput | boolean
+    funcionario?: funcionarioUpdateManyWithoutUsuarioNestedInput
+  }
+
+  export type usuarioUncheckedUpdateWithoutClienteInput = {
+    id_usuario?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password_hash?: StringFieldUpdateOperationsInput | string
+    tipo?: Enumtipo_usuarioFieldUpdateOperationsInput | $Enums.tipo_usuario
+    ativo?: BoolFieldUpdateOperationsInput | boolean
+    funcionario?: funcionarioUncheckedUpdateManyWithoutUsuarioNestedInput
+  }
+
+  export type clienteCreateWithoutUsuarioInput = {
+    cpf: bigint | number
+    nome: string
+    telefone?: string | null
+  }
+
+  export type clienteUncheckedCreateWithoutUsuarioInput = {
+    cpf: bigint | number
+    nome: string
+    telefone?: string | null
+  }
+
+  export type clienteCreateOrConnectWithoutUsuarioInput = {
+    where: clienteWhereUniqueInput
+    create: XOR<clienteCreateWithoutUsuarioInput, clienteUncheckedCreateWithoutUsuarioInput>
+  }
+
+  export type funcionarioCreateWithoutUsuarioInput = {
+    cpf: bigint | number
+    nome: string
+    telefone?: string | null
+    revisao?: revisaoCreateNestedManyWithoutFuncionarioInput
+  }
+
+  export type funcionarioUncheckedCreateWithoutUsuarioInput = {
+    cpf: bigint | number
+    nome: string
+    telefone?: string | null
+    revisao?: revisaoUncheckedCreateNestedManyWithoutFuncionarioInput
+  }
+
+  export type funcionarioCreateOrConnectWithoutUsuarioInput = {
+    where: funcionarioWhereUniqueInput
+    create: XOR<funcionarioCreateWithoutUsuarioInput, funcionarioUncheckedCreateWithoutUsuarioInput>
+  }
+
+  export type funcionarioCreateManyUsuarioInputEnvelope = {
+    data: funcionarioCreateManyUsuarioInput | funcionarioCreateManyUsuarioInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type clienteUpsertWithoutUsuarioInput = {
+    update: XOR<clienteUpdateWithoutUsuarioInput, clienteUncheckedUpdateWithoutUsuarioInput>
+    create: XOR<clienteCreateWithoutUsuarioInput, clienteUncheckedCreateWithoutUsuarioInput>
+    where?: clienteWhereInput
+  }
+
+  export type clienteUpdateToOneWithWhereWithoutUsuarioInput = {
+    where?: clienteWhereInput
+    data: XOR<clienteUpdateWithoutUsuarioInput, clienteUncheckedUpdateWithoutUsuarioInput>
+  }
+
+  export type clienteUpdateWithoutUsuarioInput = {
+    cpf?: BigIntFieldUpdateOperationsInput | bigint | number
+    nome?: StringFieldUpdateOperationsInput | string
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type clienteUncheckedUpdateWithoutUsuarioInput = {
+    cpf?: BigIntFieldUpdateOperationsInput | bigint | number
+    nome?: StringFieldUpdateOperationsInput | string
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type funcionarioUpsertWithWhereUniqueWithoutUsuarioInput = {
+    where: funcionarioWhereUniqueInput
+    update: XOR<funcionarioUpdateWithoutUsuarioInput, funcionarioUncheckedUpdateWithoutUsuarioInput>
+    create: XOR<funcionarioCreateWithoutUsuarioInput, funcionarioUncheckedCreateWithoutUsuarioInput>
+  }
+
+  export type funcionarioUpdateWithWhereUniqueWithoutUsuarioInput = {
+    where: funcionarioWhereUniqueInput
+    data: XOR<funcionarioUpdateWithoutUsuarioInput, funcionarioUncheckedUpdateWithoutUsuarioInput>
+  }
+
+  export type funcionarioUpdateManyWithWhereWithoutUsuarioInput = {
+    where: funcionarioScalarWhereInput
+    data: XOR<funcionarioUpdateManyMutationInput, funcionarioUncheckedUpdateManyWithoutUsuarioInput>
+  }
+
+  export type funcionarioScalarWhereInput = {
+    AND?: funcionarioScalarWhereInput | funcionarioScalarWhereInput[]
+    OR?: funcionarioScalarWhereInput[]
+    NOT?: funcionarioScalarWhereInput | funcionarioScalarWhereInput[]
+    cpf?: BigIntFilter<"funcionario"> | bigint | number
+    id_usuario?: IntFilter<"funcionario"> | number
+    nome?: StringFilter<"funcionario"> | string
+    telefone?: StringNullableFilter<"funcionario"> | string | null
+  }
+
   export type revisaoCreateManyFuncionarioInput = {
     id_revisao?: number
     placa_veiculo: string
@@ -8342,6 +8993,32 @@ export namespace Prisma {
     cpf_funcionario?: BigIntFieldUpdateOperationsInput | bigint | number
     data_revisao?: DateTimeFieldUpdateOperationsInput | Date | string
     data_prox_revisao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type funcionarioCreateManyUsuarioInput = {
+    cpf: bigint | number
+    nome: string
+    telefone?: string | null
+  }
+
+  export type funcionarioUpdateWithoutUsuarioInput = {
+    cpf?: BigIntFieldUpdateOperationsInput | bigint | number
+    nome?: StringFieldUpdateOperationsInput | string
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    revisao?: revisaoUpdateManyWithoutFuncionarioNestedInput
+  }
+
+  export type funcionarioUncheckedUpdateWithoutUsuarioInput = {
+    cpf?: BigIntFieldUpdateOperationsInput | bigint | number
+    nome?: StringFieldUpdateOperationsInput | string
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    revisao?: revisaoUncheckedUpdateManyWithoutFuncionarioNestedInput
+  }
+
+  export type funcionarioUncheckedUpdateManyWithoutUsuarioInput = {
+    cpf?: BigIntFieldUpdateOperationsInput | bigint | number
+    nome?: StringFieldUpdateOperationsInput | string
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 

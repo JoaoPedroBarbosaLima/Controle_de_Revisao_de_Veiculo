@@ -9,15 +9,14 @@ class FuncionarioService {
     
     static async registrarFuncionario(dadosFuncionario) {
         try{
-            const novoFunc = await Prisma.funcionario.create({                
+
+            return await Prisma.funcionario.create({                
                 data: {
                     cpf: dadosFuncionario.cpf,
                     nome: dadosFuncionario.nome,
                     telefone: dadosFuncionario.telefone
-                },
-            });
-
-            return novoFunc
+                }
+            })
 
         } catch (erro) {
             if(erro.code  == 'P2002'){

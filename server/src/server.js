@@ -3,6 +3,7 @@ import { mainRouter } from "./routes/main.js"
 import { funcionarioRouter } from "./routes/funcionario.js"
 import { veiculoRouter } from "./routes/veiculo.js"
 import { clienteRouter } from "./routes/cliente.js"
+import { usuarioRouter } from "./routes/Usuario.js"
 
 const PORT = 5000
 
@@ -13,7 +14,8 @@ server.use(
     mainRouter,
     funcionarioRouter,
     veiculoRouter,
-    clienteRouter
+    clienteRouter,
+    usuarioRouter
 )
 
 server.listen(PORT, () => {

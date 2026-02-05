@@ -26,7 +26,6 @@ class FuncionarioController {
         try{
 
             const rslt = await FuncionarioService.registrarFuncionario(request.body)
-            console.log(rslt)
             response.status(201).json({
                 message: 'Pessoa registrada com succeso',
                 cpf: parseInt(rslt.cpf),
@@ -35,7 +34,6 @@ class FuncionarioController {
             })
 
         }catch (erro){
-            console.log(erro)
             response.status(400).json({
                 Erro: erro.message
             })
@@ -51,7 +49,6 @@ class FuncionarioController {
                 cpf: parseInt(rslt.cpf)
             })
         } catch(erro){
-            console.log(erro)
             response.status(400).json({erro:'Erro ao deletar'})
         }
     }
