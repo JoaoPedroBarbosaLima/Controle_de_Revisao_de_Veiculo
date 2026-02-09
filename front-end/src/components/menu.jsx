@@ -2,7 +2,7 @@ const Menu = () => {
 
     return(
         <>
-            <h2>Olá, mundo</h2>
+            <h2></h2>
         </>
     )
 

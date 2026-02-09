@@ -1,12 +1,9 @@
-import './App.css'
-import Menu from './menu'
-import Login from './login.jsx'
 
 function App() {
 
   return (
     <div className="App">
-      <Login/>
+      <h1>Logado com sucesso</h1>
     </div>
   )
 }

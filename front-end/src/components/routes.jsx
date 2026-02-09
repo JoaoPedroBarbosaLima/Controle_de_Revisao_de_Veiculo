@@ -1,7 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Login from './login.jsx'
-import App from './App.jsx'
-// import Registro from './Registro.jsx'
+import Registro from './registro.jsx'
+import Home from './home.jsx'
+
 
 const Router = () => {
    return (
@@ -9,7 +10,8 @@ const Router = () => {
       <BrowserRouter>
          <Routes>
             <Route path="/Login" element={<Login/>}/>
-            {/* <Route path="/Registro" element={<Registro/>}/> */}
+            <Route path="/Registro" element={<Registro/>}/>
+            <Route path="/Home" element={<Home/>}/>
          </Routes>
       </BrowserRouter>
 

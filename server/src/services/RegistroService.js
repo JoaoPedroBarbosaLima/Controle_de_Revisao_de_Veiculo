@@ -2,7 +2,6 @@ import { Prisma } from '../database/client.js'
 import UsuarioService from './UsuarioService.js'
 import ClienteService from './ClienteService.js'
 
-
 class RegistroService {
     static async registrarUsuarioCliente(dados){
         try {

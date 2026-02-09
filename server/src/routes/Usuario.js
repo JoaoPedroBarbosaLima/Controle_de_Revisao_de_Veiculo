@@ -4,10 +4,12 @@ import UsuarioControl from "../controllers/UsuarioController.js"
 const UsuarioController = new UsuarioControl()
 const usuarioRouter = express.Router()
 
-usuarioRouter.get('/api/Usuario', UsuarioController.getAll)
+usuarioRouter.get('/api/usuario', UsuarioController.getAll)
 
-usuarioRouter.post('/api/Usuario', UsuarioController.create)
+usuarioRouter.post('/api/usuario', UsuarioController.create)
 
-usuarioRouter.delete('/api/Usuario', UsuarioController.delete)
+usuarioRouter.delete('/api/usuario', UsuarioController.delete)
+
+usuarioRouter.post('/api/usuario/login', UsuarioController.login)
 
 export { usuarioRouter }
