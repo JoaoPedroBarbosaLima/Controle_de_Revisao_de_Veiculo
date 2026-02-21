@@ -120,6 +120,13 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.ClienteScalarFieldEnum = {
+  cpf: 'cpf',
+  id_usuario: 'id_usuario',
+  nome: 'nome',
+  telefone: 'telefone'
+};
+
 exports.Prisma.FuncionarioScalarFieldEnum = {
   cpf: 'cpf',
   id_usuario: 'id_usuario',
@@ -135,29 +142,22 @@ exports.Prisma.RevisaoScalarFieldEnum = {
   data_prox_revisao: 'data_prox_revisao'
 };
 
+exports.Prisma.UsuarioScalarFieldEnum = {
+  id_usuario: 'id_usuario',
+  email: 'email',
+  password_hash: 'password_hash',
+  tipo: 'tipo',
+  ativo: 'ativo'
+};
+
 exports.Prisma.VeiculoScalarFieldEnum = {
   placa: 'placa',
   quilometragem: 'quilometragem',
   cor: 'cor',
   modelo: 'modelo',
   marca: 'marca',
-  tipo: 'tipo'
-};
-
-exports.Prisma.ClienteScalarFieldEnum = {
-  cpf: 'cpf',
-  id_usuario: 'id_usuario',
-  nome: 'nome',
-  telefone: 'telefone'
-};
-
-exports.Prisma.UsuarioScalarFieldEnum = {
-  id_usuario: 'id_usuario',
-  nome: 'nome',
-  email: 'email',
-  password_hash: 'password_hash',
   tipo: 'tipo',
-  ativo: 'ativo'
+  cpf_responsavel: 'cpf_responsavel'
 };
 
 exports.Prisma.SortOrder = {
@@ -174,23 +174,23 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-exports.tipo_veiculo = exports.$Enums.tipo_veiculo = {
-  CARRO: 'CARRO',
-  MOTO: 'MOTO'
-};
-
 exports.tipo_usuario = exports.$Enums.tipo_usuario = {
   CLIENTE: 'CLIENTE',
   FUNCIONARIO: 'FUNCIONARIO',
   ADMIN: 'ADMIN'
 };
 
+exports.tipo_veiculo = exports.$Enums.tipo_veiculo = {
+  CARRO: 'CARRO',
+  MOTO: 'MOTO'
+};
+
 exports.Prisma.ModelName = {
+  cliente: 'cliente',
   funcionario: 'funcionario',
   revisao: 'revisao',
-  veiculo: 'veiculo',
-  cliente: 'cliente',
-  usuario: 'usuario'
+  usuario: 'usuario',
+  veiculo: 'veiculo'
 };
 
 /**

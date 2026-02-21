@@ -7,9 +7,20 @@ datasource db {
   provider = "postgresql"
 }
 
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model cliente {
+  cpf        BigInt    @id
+  id_usuario Int       @unique @default(autoincrement())
+  nome       String    @db.VarChar(50)
+  telefone   String?   @db.VarChar(11)
+  usuario    usuario   @relation(fields: [id_usuario], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction)
+  veiculo    veiculo[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model funcionario {
   cpf        BigInt    @id
-  id_usuario Int       @default(autoincrement())
+  id_usuario Int       @unique @default(autoincrement())
   nome       String    @db.VarChar(50)
   telefone   String?   @db.VarChar(11)
   usuario    usuario   @relation(fields: [id_usuario], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction)
@@ -23,45 +34,39 @@ model revisao {
   data_revisao      DateTime    @db.Date
   data_prox_revisao DateTime    @db.Date
   funcionario       funcionario @relation(fields: [cpf_funcionario], references: [cpf], onDelete: NoAction, onUpdate: NoAction)
-  veiculo           veiculo     @relation(fields: [placa_veiculo], references: [placa], onDelete: NoAction, onUpdate: NoAction)
-}
-
-model veiculo {
-  placa         String       @id @db.VarChar(7)
-  quilometragem BigInt
-  cor           String       @db.VarChar(10)
-  modelo        String       @db.VarChar(20)
-  marca         String       @db.VarChar(20)
-  tipo          tipo_veiculo
-  revisao       revisao[]
-}
-
-model cliente {
-  cpf        BigInt  @id
-  id_usuario Int     @unique @default(autoincrement())
-  nome       String  @db.VarChar(50)
-  telefone   String? @db.VarChar(11)
-  usuario    usuario @relation(fields: [id_usuario], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction)
+  veiculo           veiculo     @relation(fields: [placa_veiculo], references: [placa], onDelete: Cascade, onUpdate: NoAction)
 }
 
 model usuario {
-  id_usuario    Int           @id @default(autoincrement())
-  nome          String        @db.VarChar(50)
-  email         String        @unique @db.VarChar(150)
-  password_hash String        @db.VarChar(255)
-  tipo          tipo_usuario  @default(CLIENTE)
+  id_usuario    Int          @id @default(autoincrement())
+  email         String       @unique @db.VarChar(150)
+  password_hash String       @db.VarChar(255)
+  tipo          tipo_usuario @default(CLIENTE)
   ativo         Boolean
   cliente       cliente?
-  funcionario   funcionario[]
+  funcionario   funcionario?
 }
 
-enum tipo_veiculo {
-  CARRO
-  MOTO
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model veiculo {
+  placa           String       @id @db.VarChar(7)
+  quilometragem   BigInt
+  cor             String       @db.VarChar(10)
+  modelo          String       @db.VarChar(20)
+  marca           String       @db.VarChar(20)
+  tipo            tipo_veiculo
+  cpf_responsavel BigInt?
+  revisao         revisao[]
+  cliente         cliente?     @relation(fields: [cpf_responsavel], references: [cpf], onDelete: NoAction, onUpdate: NoAction)
 }
 
 enum tipo_usuario {
   CLIENTE
   FUNCIONARIO
   ADMIN
+}
+
+enum tipo_veiculo {
+  CARRO
+  MOTO
 }

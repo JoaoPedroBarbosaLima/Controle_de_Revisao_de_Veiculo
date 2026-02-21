@@ -1,3 +1,4 @@
+import styles from '../css/Auth.module.css'
 import { useState } from "react";
 import PasswordToggle from "./ShowPassword";
 
@@ -5,7 +6,7 @@ const Passwordinput = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="box-input">
+    <div className={styles.box_input}>
       <PasswordToggle
         show={showPassword}
         onToggle={() => setShowPassword(prev => !prev)}

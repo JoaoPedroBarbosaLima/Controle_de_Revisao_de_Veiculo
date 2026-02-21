@@ -3,6 +3,7 @@ import ClienteService from "../services/ClienteService.js"
 class ClienteController {
     async getAll(request,response){
         try{
+            if(!(request.user.tipo == 'ADMIN'))  return response.status(400).json({ message: "Usuario não autorizado"});
             const rslt = await ClienteService.listarCliente()
     
             const clientes = rslt.map(c => ({
@@ -11,10 +12,10 @@ class ClienteController {
                 telefone: c.telefone
             }))
     
-            response.status(200).json(clientes)
+            return response.status(200).json(clientes)
 
         } catch(erro){
-            response.status(400).json({Erro:`Erro ao listar Clientes`})
+            return response.status(400).json({Erro:`Erro ao listar Clientes`})
         }
 
     }

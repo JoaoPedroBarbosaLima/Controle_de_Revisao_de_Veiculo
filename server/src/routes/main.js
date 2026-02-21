@@ -1,5 +1,4 @@
 import express from "express"
-import { Query } from "pg"
 const mainRouter = express.Router()
 
 mainRouter.get('/', (request,response)=>{
@@ -18,4 +17,4 @@ mainRouter.get('/admin', (request,response) => {
     response.status(401).send("<h1>Unauthorized</h1>")
 })
 
-export {mainRouter}
+export { mainRouter }

@@ -4,13 +4,31 @@ import Hash from './utils/passwordHash.js'
 
 class UsuarioService{
 
+    static async verificarusuarioexistente(dadosUsuario){
+        try {
+
+            const existente = await Prisma.usuario.findUnique({
+                where: {
+                    id_usuario: dadosUsuario.id_usuario
+                }
+            })
+
+            if(existente) return existente
+            return null
+            
+        } catch (error) {
+            throw new Error('Falha no serviço para verificar usuario existente')
+        }
+
+            
+        }
+
     static async registrarUsuario(tx,dadosUsuario){
         try {
             const senha = await Hash.password_hash(dadosUsuario.password_hash)
 
             return await tx.usuario.create({
                 data: {
-                    nome: dadosUsuario.nome,
 	                email: dadosUsuario.email,
                     ativo: true,
 	                password_hash: senha
@@ -26,6 +44,7 @@ class UsuarioService{
         }
     }
 
+    
     static async mudarsenha(usuarioid,senhaatual,novasenha){
         try{
             const usuario = await Prisma.usuario.findUnique({
@@ -54,8 +73,6 @@ class UsuarioService{
                 })
             }
 
-
-
         } catch(erro){
             throw new Error(`Erro ao atualizar senha`)
         }
@@ -75,13 +92,13 @@ class UsuarioService{
 
             
             if(!usuario){
-                return { sucesso: false, mensagem: `Usuário de e-mail '${dadosUsuario.email}' não encontrado.` };
+                return { sucesso: false, mensagem: `Credenciais incorretas` };
             }
             
             const compare = await Hash.compare_hash(dadosUsuario.senha, usuario.password_hash)
 
             if(!compare){
-                return { sucesso: false, mensagem: `senha não bate` };
+                return { sucesso: false, mensagem: `Credenciais incorretas` };
             }
 
             return { sucesso: true, mensagem: `Usuario encontrado`, usuario: usuario };
@@ -93,11 +110,11 @@ class UsuarioService{
     }
     
 
-        static async buscarusuarioid(dadosUsuario){
+    static async buscarusuarioid(tx,id){
         try{
-            const usuario = await Prisma.usuario.findUnique({
+            const usuario = await tx.usuario.findUnique({
                 where: {
-                    id_usuario: dadosUsuario.id_usuario,
+                    id_usuario: id,
                     ativo: true
                 }
             })
@@ -115,6 +132,71 @@ class UsuarioService{
             return { sucesso: false, mensagem: 'Erro ao buscar usuário.', detalhe: erro.message };
         }
     }
+
+
+    static async updateUsuariopermissao(tx,dados){
+
+        try {
+            
+            console.log(dados)
+            let usuario
+
+            if(tx == null){
+                usuario = await Prisma.usuario.update({
+                where: {
+                    id_usuario: dados.id_usuario
+                },
+                data: {
+                    tipo: dados.tipo
+                }
+            })
+            } else{
+                usuario = await tx.usuario.update({
+                    where: {
+                        email: dados.email
+                    },
+                    data: {
+                        tipo: dados.tipo
+                    }
+                })
+            }
+
+
+            if(!usuario){
+                return { sucesso: false, mensagem: `Usuário de id '${dadosUsuario.email}' não encontrado.` };
+            }
+                
+            return { sucesso: true, mensagem: `Usuario encontrado`, usuario: usuario };
+
+        } catch (erro) {
+            return { sucesso: false, mensagem: 'Erro ao buscar usuário.', detalhe: erro.message };
+        }
+    }
+
+    static async updateUsuario(tx,dados){
+
+        try {
+            
+            const usuario = await tx.usuario.update({
+                where: {
+                    id_usuario: dados.id
+                },
+                data: {
+                    email: dados.email
+                }
+            })
+
+            if(!usuario){
+                return { sucesso: false, mensagem: `Usuário de id '${dadosUsuario.email}' não encontrado.` };
+            }
+                
+            return { sucesso: true, mensagem: `Usuario encontrado`, usuario: usuario };
+
+        } catch (erro) {
+            return { sucesso: false, mensagem: 'Erro ao buscar usuário.', detalhe: erro.message };
+        }
+    }
+
 
 }
 

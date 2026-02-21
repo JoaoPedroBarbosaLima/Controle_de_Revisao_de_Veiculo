@@ -1,3 +1,4 @@
+import test from 'node:test';
 import { Prisma } from '../database/client.js'
 
 class AppError extends Error {
@@ -10,12 +11,11 @@ class AppError extends Error {
 class VeiculoService { 
 
     static async registrarVeiculo(dadosVeiculo){
-
         let tipos = [ 'MOTO', 'CARRO']
         if(!(tipos.includes((dadosVeiculo.tipo).toUpperCase()))){
-                throw new Error(`Tipo: ${(dadosVeiculo.tipo).toUpperCase()} não existe`)
+            throw new Error(`Tipo: ${(dadosVeiculo.tipo).toUpperCase()} não existe`)
         }
-        
+
         const cliente = await Prisma.cliente.findUnique({
             where: {
                 cpf: dadosVeiculo.cpf_responsavel
@@ -42,7 +42,7 @@ class VeiculoService {
             return novocarro      
 
         } catch(erro){
-
+            console.log(erro)
             if (erro.code == 1){
                 throw new Error(erro)
             }
@@ -59,9 +59,26 @@ class VeiculoService {
         }
     }
 
-    static async listarveiculos(){
+    static async listarveiculos(dados){
         try{
-            return await Prisma.veiculo.findMany()
+
+            if(dados.tipo == 'FUNCIONARIO' || dados.tipo == 'ADMIN'){
+                return await Prisma.veiculo.findMany({
+                    include: {
+                        revisao: true
+                    }
+                })
+            }
+
+            return await Prisma.veiculo.findMany({
+                where: {
+                    cpf_responsavel: dados.cpf
+                },
+                include: {
+                    revisao: true
+                }
+            })
+
         } catch(erro){
             throw new Error(erro)
         }
@@ -77,6 +94,7 @@ class VeiculoService {
             })
 
         }catch(erro){
+            console.log(erro)
             throw new Error('Falha no serviço para deletar veiculo')
         }
     }

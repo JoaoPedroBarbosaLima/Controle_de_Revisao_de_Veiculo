@@ -4,10 +4,10 @@ import FuncionarioControl from "../controllers/FuncionarioController.js"
 const FuncionarioController = new FuncionarioControl()
 const funcionarioRouter = express.Router()
 
-funcionarioRouter.get('/api/funcionarios', FuncionarioController.getAll)
+funcionarioRouter.get('/api/funcionario', FuncionarioController.getAll)
 
-funcionarioRouter.post('/api/funcionarios', FuncionarioController.create)
+funcionarioRouter.post('/api/funcionario', FuncionarioController.create)
 
-funcionarioRouter.delete('/api/funcionarios', FuncionarioController.delete)
+funcionarioRouter.delete('/api/funcionario', FuncionarioController.delete)
 
 export { funcionarioRouter }

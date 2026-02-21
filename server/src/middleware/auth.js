@@ -3,19 +3,24 @@ import { promisify } from "util"
 import "dotenv/config";
 
 export default async (req, res, next) => {
-    const token = req.cookies?.token
+
+    try {
+        const token = req.cookies?.token
     if(!token){
         return res.status(401).json({erro: "Token não foi fornecido"})
     }
-    try {
         const decoded = await promisify(jwt.verify)(token,process.env.SECRET)
-        req.body.userId = decoded.id_usuario
-        
+
+        req.user = {
+            id_usuario: decoded.id_usuario,
+            tipo: decoded.tipo,
+            email: decoded.email,
+        }
+
         return next()
 
     } catch (error) {
-        res.status(400).json(error)
+        return res.status(400).json(error)
     }
 
-    next()
 }

@@ -5,11 +5,10 @@ const UsuarioController = new UsuarioControl()
 const usuarioRouter = express.Router()
 
 usuarioRouter.get('/api/usuario', UsuarioController.getAll)
-
-usuarioRouter.post('/api/usuario', UsuarioController.create)
-
+usuarioRouter.get('/api/auth/validate', UsuarioController.validate)
 usuarioRouter.delete('/api/usuario', UsuarioController.delete)
-
-usuarioRouter.post('/api/usuario/login', UsuarioController.login)
+usuarioRouter.get('/api/usuario/cliente', UsuarioController.getusuariocliente)
+usuarioRouter.get('/api/usuario/logout', UsuarioController.logout)
+usuarioRouter.put('/api/usuario/update', UsuarioController.update)
 
 export { usuarioRouter }

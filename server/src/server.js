@@ -6,7 +6,9 @@ import { funcionarioRouter } from "./routes/funcionario.js"
 import { veiculoRouter } from "./routes/veiculo.js"
 import { clienteRouter } from "./routes/cliente.js"
 import { usuarioRouter } from "./routes/Usuario.js"
+import { revisaoRouter } from "./routes/revisao.js"
 import auth from "./middleware/auth.js"
+import { login_registroRouter } from "./routes/login_registro.js"
 
 const PORT = 5000
 
@@ -19,18 +21,17 @@ server.use(cors({
     credentials: true    
 }));
 
-
 server.use(cookieParser())
+server.use(login_registroRouter)
 
-server.use(usuarioRouter)
 server.use(auth)
-
-
 server.use(
+    revisaoRouter,
     mainRouter,
     funcionarioRouter,
     veiculoRouter,
     clienteRouter,
+    usuarioRouter,
 )
 
 server.listen(PORT, () => {
