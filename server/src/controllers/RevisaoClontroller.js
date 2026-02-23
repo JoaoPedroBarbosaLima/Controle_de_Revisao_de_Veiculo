@@ -9,7 +9,6 @@ class Revisaocontroller {
 
         const revisoes = rslt.map(r => ({
             id_revisao: r.id_revisao,
-            cpf_funcionario: parseInt(r.cpf_funcionario),
             placa_veiculo: r.placa_veiculo,
             data_revisao: r.data_revisao,
             data_prox_revisao: r.data_prox_revisao,

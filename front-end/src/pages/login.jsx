@@ -52,6 +52,7 @@ const Login = () => {
       navigate("/dashboard")
 
     } catch (erro) {
+      alert('credenciais incorretas')
       console.error("Erro:", erro);
     }
   };

@@ -12,7 +12,13 @@ const Listrevisoes = () => {
 
     const [revisoes,setRevisoes] = useState([])
     const [busca,setBusca] = useState('')
-    const pesquisa = revisoes.filter(revisao => revisao.placa_veiculo.toLowerCase().includes(busca.toLowerCase()))
+    const pesquisa = revisoes
+    .filter(revisao =>
+        revisao.placa_veiculo.toLowerCase().includes(busca.toLowerCase())
+    )
+    .sort((a, b) => 
+        new Date(a.data_prox_revisao) - new Date(b.data_prox_revisao)
+    );
     
     useEffect(() => {
         api.get('api/revisao', {
@@ -44,7 +50,6 @@ const Listrevisoes = () => {
                             <tr>
                                 <th>Número da revisão</th>
                                 <th>Placa do veículo</th>
-                                <th>CPF Funcionário</th>
                                 <th>Data Revisão</th>
                                 <th>Data Próxima Revisão</th>
                             </tr>
@@ -54,7 +59,6 @@ const Listrevisoes = () => {
                                 <tr key={revisao.id_revisao}>
                                     <td>{revisao.id_revisao}</td>
                                     <td>{revisao.placa_veiculo}</td>
-                                    <td>{revisao.cpf_funcionario}</td>
                                     <td>{formatarData(revisao.data_revisao)}</td>
                                     <td>{formatarData(revisao.data_prox_revisao)}</td>
                                 </tr>

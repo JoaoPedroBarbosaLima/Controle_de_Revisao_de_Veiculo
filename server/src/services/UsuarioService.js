@@ -44,41 +44,6 @@ class UsuarioService{
         }
     }
 
-    
-    static async mudarsenha(usuarioid,senhaatual,novasenha){
-        try{
-            const usuario = await Prisma.usuario.findUnique({
-                where: {
-                    id_usuario: usuarioid
-                }
-            })
-
-            if(!usuario){
-                throw new Error(`Usuario de id '${usuarioid}' não encontrado`)
-            }
-
-            else if (senhaatual == novasenha){
-                throw new Error(`Insira uma senha diferente!!`)
-            }
-
-            else{
-                const novasenhahash = await Hash.password_hash(novasenha)
-                return await Prisma.usuario.update({
-                    where: {
-                        id_usuario: usuarioid
-                    },
-                    data: {
-                        password_hash: novasenhahash
-                    }
-                })
-            }
-
-        } catch(erro){
-            throw new Error(`Erro ao atualizar senha`)
-        }
-
-    }
-
     static async buscarusuariologado(dadosUsuario){
         try{
 
@@ -196,7 +161,6 @@ class UsuarioService{
             return { sucesso: false, mensagem: 'Erro ao buscar usuário.', detalhe: erro.message };
         }
     }
-
 
 }
 

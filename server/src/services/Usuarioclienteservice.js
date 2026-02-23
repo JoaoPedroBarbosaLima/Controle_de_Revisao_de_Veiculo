@@ -19,10 +19,10 @@ class Usuarioclienteservice {
 
                 const updateCliente = await ClienteService.updateCliente(tx, dados)
 
-                return { sucesso: true, mensagem: `cliente e usuario atualizado com sucesso` };
+                return { sucesso: true, mensagem: `Dados alterados com sucesso` };
             })
         } catch (error) {
-            return { sucesso: false, mensagem: `nao foi possivel atualizar cliente e usuario` };
+            return { sucesso: false, mensagem: `nao foi possivel atualizar os dados` };
         }
     }
 
